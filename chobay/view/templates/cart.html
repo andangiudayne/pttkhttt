@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Giỏ hàng · ChợBay{% endblock %}
+{% block content %}
+<h2>Giỏ hàng</h2>
+{% if cart.is_empty() %}
+<div class="empty"><div class="empty-ico">🛒</div><div><b>Giỏ hàng đang trống.</b>
+  <div class="muted" style="margin-top:6px"><a class="chip" href="{{ url_for('home.index') }}">Tiếp tục mua sắm</a></div></div></div>
+{% else %}
+<div class="layout2">
+  <table class="t">
+    <tr><th>Sản phẩm</th><th>Đơn giá</th><th>Số lượng</th><th>Thành tiền</th><th></th></tr>
+    {% for i in cart.items %}
+    <tr><td><div style="display:flex;gap:12px;align-items:center"><img src="{{ url_for('static', filename='img/products/' ~ i.product.image_path) }}" style="width:52px;height:52px;object-fit:cover;border-radius:8px" alt="">
+          <div><a href="{{ url_for('home.product_detail', pid=i.product.product_id) }}" style="font-weight:600">{{ i.product.name }}</a>
+          {% if i.product.temp_class.value != 'AMBIENT' %}<div><span class="tag {{ i.product.temp_class.value }}">{{ 'Đông lạnh' if i.product.temp_class.value == 'FROZEN' else 'Giữ mát' }}</span></div>{% endif %}</div></div></td>
+        <td>{{ i.cart_price|vnd }}</td>
+        <td><form method="post" action="{{ url_for('cart.update', pid=i.product.product_id) }}"><input type="number" name="qty" value="{{ i.quantity }}" min="0" max="{{ i.product.stock }}" aria-label="Số lượng" style="width:68px;font:inherit;padding:6px;border-radius:8px;border:1px solid var(--line)" onchange="this.form.submit()"></form></td>
+        <td><b>{{ i.line_total()|vnd }}</b></td>
+        <td><form method="post" action="{{ url_for('cart.update', pid=i.product.product_id) }}"><input type="hidden" name="qty" value="0"><button class="cart-del" aria-label="Xóa {{ i.product.name }} khỏi giỏ">Xóa</button></form></td></tr>
+    {% endfor %}
+  </table>
+  <div class="panel">
+    <h3 style="margin-top:0">Tóm tắt</h3>
+    <div class="sum"><span>Tạm tính</span><b>{{ cart.subtotal()|vnd }}</b></div>
+    <div class="sum muted"><span>Tổng khối lượng</span><span>{{ ('%g'|format(cart.total_weight())).replace('.', ',') }} kg</span></div>
+    {% if cart.coldest_class().value != 'AMBIENT' %}<div class="sum muted"><span>Bảo quản</span><span>{{ cart.coldest_class()|vi }}</span></div>{% endif %}
+    <p class="muted" style="font-size:13.5px">Phí giao được tính ở bước sau: hệ thống chọn cách giao phù hợp với các món trong giỏ và địa chỉ của bạn.</p>
+    <a class="btn leaf" style="display:block;text-align:center;padding:12px" href="{{ url_for('order.checkout_form') }}">Tiến hành thanh toán</a>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Kênh điều phối · ChợBay{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+{# Giao diện riêng cho nhân viên (tác nhân Điều phối viên) — giống kênh người bán / trung tâm vận hành của các sàn TMĐT. #}
+<body class="ops">
+<header class="ops-top">
+  <a class="logo" href="{{ url_for('dispatch.board') }}">Chợ<span>Bay</span> <small>Kênh điều phối</small></a>
+  <form class="ops-search" action="{{ url_for('dispatch.board') }}" method="get">
+    <input name="q" value="{{ q or '' }}" placeholder="Tìm mã đơn (#12) hoặc tên khách" aria-label="Tìm chuyến">
+  </form>
+  <div class="ops-user">{% if staff %}<span class="who">{{ staff.full_name }}<small>Điều phối viên</small></span>{% endif %}
+    <form method="post" action="{{ url_for('account.logout') }}"><button class="linkbtn">Đăng xuất</button></form></div>
+</header>
+<div class="ops-wrap">
+  <nav class="ops-nav">
+    <a href="{{ url_for('dispatch.board') }}" class="{{ 'on' if page == 'board' }}">📦 Quản lý chuyến giao</a>
+    <a href="{{ url_for('dispatch.fleet') }}" class="{{ 'on' if page == 'fleet' }}">🛰️ Đội phương tiện</a>
+    <a href="{{ url_for('dispatch.weather') }}" class="{{ 'on' if page == 'weather' }}">🌦️ Thời tiết</a>
+    <a href="{{ url_for('home.index') }}">🛒 Xem cửa hàng</a>
+  </nav>
+  <main class="ops-main">
+    {% with msgs = get_flashed_messages() %}{% for m in msgs %}<div class="flash">{{ m }}</div>{% endfor %}{% endwith %}
+    {% block content %}{% endblock %}
+  </main>
+</div>
+</body>
+</html>

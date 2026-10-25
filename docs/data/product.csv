@@ -1,0 +1,23 @@
+﻿product_id,category_id,kind,name,brand,price,unit,weight_kg,temp_class,is_fragile,is_liquid,strong_odor,stock,rating,image_path,description
+1,6,PackagedFood,Mì Kim Chi Acecook gói 75g,Acecook,4500,gói,0.08,AMBIENT,0,0,0,420,4.6,P01.jpg,Mì ăn liền vị kim chi cay nhẹ.
+2,6,PackagedFood,Mì không chiên Mikochi vị sườn heo,Acecook,7000,gói,0.08,AMBIENT,0,0,0,260,4.5,P02.jpg,"Sợi mì không chiên, ít dầu."
+3,6,PackagedFood,Bún bò Huế ăn liền Vifon 65g,Vifon,5500,gói,0.065,AMBIENT,0,0,0,310,4.4,P03.jpg,Bún ăn liền hương vị bò Huế.
+4,6,PackagedFood,Bánh phở khô Phở Story 500g,Chin-Su,32000,gói,0.5,AMBIENT,0,0,0,120,4.5,P04.jpg,Bánh phở khô sợi dẹt để nấu phở tại nhà.
+5,6,PackagedFood,Gạo nếp Hoa Vàng Vinaseed túi 2kg,Vinaseed,78000,túi,2.0,AMBIENT,0,0,0,80,4.7,P05.jpg,"Gạo nếp dẻo thơm, nấu xôi, gói bánh."
+6,4,Beverage,Sữa tươi tiệt trùng Vinamilk 100% hộp 1L,Vinamilk,36000,hộp,1.05,AMBIENT,0,1,0,200,4.8,P06.jpg,Sữa tươi tiệt trùng nguyên chất.
+7,4,Beverage,Thùng 48 hộp sữa tươi Vinamilk 180ml,Vinamilk,392000,thùng,9.6,AMBIENT,0,1,0,45,4.9,P07.jpg,Thùng 48 hộp 180ml — hàng nặng.
+8,4,PackagedFood,Sữa chua dâu Vinamilk lốc 4 hộp,Vinamilk,26000,lốc,0.42,CHILLED,0,0,0,150,4.6,P08.jpg,Sữa chua ăn vị dâu — bảo quản mát.
+9,4,PackagedFood,Sữa đặc Ngôi Sao Phương Nam 380g,Vinamilk,25000,hộp,0.4,AMBIENT,0,0,0,180,4.7,P09.jpg,Sữa đặc pha cà phê sữa đá.
+10,5,Beverage,Nước dừa Vietcoco hộp 330ml,Vietcoco,19000,hộp,0.36,AMBIENT,0,1,0,140,4.4,P10.jpg,Thức uống từ dừa Bến Tre.
+11,5,PackagedFood,Cà phê G7 3in1 bịch 22 gói,Trung Nguyên,69000,bịch,0.4,AMBIENT,0,0,0,95,4.6,P11.jpg,Cà phê hòa tan 3 trong 1.
+12,7,PackagedFood,Tương ớt Chin-su chai 250g,Chin-Su,15000,chai,0.28,AMBIENT,0,1,0,230,4.6,P12.jpg,Tương ớt cay nồng.
+13,8,PackagedFood,Bánh mì tươi Kinh Đô bơ sữa 55g,Kinh Đô,8000,cái,0.055,AMBIENT,0,0,0,90,4.3,P13.jpg,Bánh mì mềm ăn sáng.
+14,3,FrozenFood,Kem que sầu riêng hộp 4 que,Bích Hà,45000,hộp,0.3,FROZEN,0,0,1,60,4.5,P14.jpg,"Kem que vị sầu riêng — đông lạnh, mùi mạnh."
+15,3,FrozenFood,Cá basa phi lê đông lạnh 1kg,Mekong Seafood,89000,túi,1.0,FROZEN,0,0,0,70,4.4,P15.jpg,Phi lê cá basa cấp đông IQF.
+16,1,FreshFood,Thanh long ruột trắng 1kg,Nông trại Bình Thuận,32000,kg,1.0,AMBIENT,0,0,0,110,4.6,P16.jpg,Thanh long tươi hái trong ngày.
+17,1,FreshFood,"Sầu riêng Ri6 nguyên trái (~2,6kg)",Vườn Cái Mơn,245000,trái,2.6,AMBIENT,0,0,1,25,4.8,P17.jpg,Sầu riêng Ri6 cơm vàng — mùi rất mạnh.
+18,1,FreshFood,Rau muống 500g,HTX Củ Chi,12000,bó,0.5,CHILLED,0,0,0,150,4.3,P18.jpg,"Rau muống sạch, giữ mát."
+19,2,FreshFood,Trứng gà vỉ 10 quả,Trang trại Đồng Nai,33000,vỉ,0.65,AMBIENT,1,0,0,200,4.6,P19.jpg,Trứng gà tươi — hàng dễ vỡ.
+20,2,FreshFood,Tôm sú tươi 500g,Cà Mau Seafood,165000,khay,0.55,CHILLED,0,0,0,40,4.7,P20.jpg,Tôm sú tươi — giữ lạnh 0–4 °C.
+21,2,FreshFood,Thịt ba chỉ heo 500g,Trang trại Đồng Nai,78000,khay,0.5,CHILLED,0,0,0,60,4.5,P21.jpg,Thịt ba chỉ tươi — giữ lạnh.
+22,1,FreshFood,Xoài cát Hòa Lộc 1kg,Vườn Cái Bè,75000,kg,1.0,AMBIENT,0,0,0,85,4.7,P22.jpg,Xoài cát Hòa Lộc chín cây.

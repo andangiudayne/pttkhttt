@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}{{ p.name }} · ChợBay{% endblock %}
+{% block content %}
+{% set WHY = {'BR-D01': 'quá tải trọng', 'BR-D04': 'cần khoang cấp đông', 'BR-D05': 'cần khoang giữ lạnh', 'BR-D09': 'hàng có mùi mạnh'} %}
+<nav class="crumbs"><a href="{{ url_for('home.index') }}">Trang chủ</a> › <a href="{{ url_for('home.index', cat=p.category.category_id) }}">{{ p.category.name }}</a> › {{ p.name }}</nav>
+<div class="layout2" style="margin-top:12px">
+  <div class="panel"><img src="{{ url_for('static', filename='img/products/' ~ p.image_path) }}" alt="{{ p.name }}" style="width:100%;border-radius:14px">
+    <div class="muted" style="font-size:12px;margin-top:6px">Ảnh: Open Food Facts / Wikimedia Commons (CC BY-SA, CC BY, CC0)</div></div>
+  <div class="panel">
+    <div class="muted">{{ p.brand }}</div>
+    <h2 style="margin-top:6px">{{ p.name }}</h2>
+    {% if reviews.count %}<div class="muted" style="margin:-4px 0 8px"><span class="stars">{{ '★' * (reviews.avg|round|int) }}{{ '☆' * (5 - (reviews.avg|round|int)) }}</span>
+      <b style="color:var(--ink)">{{ ('%.1f'|format(reviews.avg)).replace('.', ',') }}</b> · {{ reviews.count }} đánh giá</div>{% endif %}
+    <div class="pr" style="font-size:28px;color:var(--chili);font-weight:800">{{ p.price|vnd }} <span class="muted">/ {{ p.unit }}</span></div>
+    <p>{{ p.description }}</p>
+    <form method="post" action="{{ url_for('cart.add', pid=p.product_id) }}" style="margin:16px 0 20px;display:flex;gap:10px;align-items:center">
+      {% if p.stock > 0 %}
+      <input type="number" name="qty" value="1" min="1" max="{{ p.stock }}" aria-label="Số lượng" style="width:80px;font:inherit;padding:8px;border-radius:10px;border:1px solid var(--line)">
+      <button class="btn chili">Thêm vào giỏ</button><span class="muted">Còn {{ p.stock }} {{ p.unit }}</span>
+      {% else %}<span class="status s-FAILED">Tạm hết hàng</span>{% endif %}
+    </form>
+    <table class="t">
+      <tr><th colspan="2">Thông tin giao hàng</th></tr>
+      <tr><td>Khối lượng</td><td>{{ ('%g'|format(p.weight_kg)).replace('.', ',') }} kg</td></tr>
+      <tr><td>Bảo quản</td><td>{{ p.temp_class|vi }}</td></tr>
+      {% if p.is_fragile or p.strong_odor %}<tr><td>Lưu ý</td><td>{{ ['Dễ vỡ' if p.is_fragile, 'Mùi mạnh' if p.strong_odor]|select|join(' · ') }}</td></tr>{% endif %}
+    </table>
+    <h3 style="margin:18px 0 8px">Món này có thể giao bằng</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">{% for name, code in fit if not code %}<span class="chip ok-chip">✓ {{ name.split(' (')[0] }}</span>{% endfor %}</div>
+    {% set no = fit|selectattr(1)|list %}
+    {% if no %}<p class="muted" style="font-size:13.5px;margin:10px 0 0">Không dùng:
+      {% for name, code in no %}{{ name.split(' (')[0] }} ({{ WHY.get(code, 'không phù hợp') }}){{ ', ' if not loop.last else '.' }}{% endfor %}</p>{% endif %}
+    <p class="muted" style="font-size:13px">Cách giao cuối cùng được chọn khi thanh toán, theo địa chỉ và thời tiết lúc đó.</p>
+  </div>
+</div>
+<section class="panel" style="margin-bottom:40px">
+  <h3 style="margin-top:0">Đánh giá sản phẩm</h3>
+  {% if reviews.count %}
+  <div class="rv-sum">
+    <div class="rv-avg"><b>{{ ('%.1f'|format(reviews.avg)).replace('.', ',') }}</b><span class="muted">/5</span><div class="stars">{{ '★' * (reviews.avg|round|int) }}{{ '☆' * (5 - (reviews.avg|round|int)) }}</div><div class="muted">{{ reviews.count }} đánh giá</div></div>
+    <div>{% for k, n in reviews.dist.items() %}<div class="rv-bar"><span>{{ k }} ★</span><span class="bar"><i style="width:{{ (100 * n / reviews.count)|int }}%"></i></span><span>{{ n }}</span></div>{% endfor %}</div>
+  </div>
+  {% for r in reviews['items'][:6] %}
+  <div class="rv"><b>{{ r.author }}</b> <span class="stars">{{ '★' * r.rating }}{{ '☆' * (5 - r.rating) }}</span> <span class="muted">· {{ r.created_at[:10] }} · Đã mua hàng</span>
+    {% if r.comment %}<div>{{ r.comment }}</div>{% endif %}</div>
+  {% endfor %}
+  {% else %}<p class="muted">Chưa có đánh giá cho sản phẩm này.</p>{% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{# Hậu điều kiện UC05: khách nhận xác nhận đơn và mã theo dõi. #}
+{% block title %}Đặt hàng thành công · ChợBay{% endblock %}
+{% block content %}
+{% set pay = order.payment %}
+<div class="done">
+  <div class="done-ico">✓</div>
+  <h1>Đặt hàng thành công!</h1>
+  <p class="muted">Mã đơn hàng <b>#{{ order.order_id }}</b> · {{ order.order_date.strftime('%H:%M %d/%m/%Y') }}</p>
+  <div class="done-grid">
+    <div><span>Giao bằng</span><b>{{ s.mode|vi }}</b></div>
+    <div><span>Nhận hàng dự kiến</span><b>{{ s.eta_minutes|arrival(order.order_date) }}</b></div>
+    <div><span>Thanh toán</span><b>{% if pay and pay.method() == 'CREDIT' %}Thẻ •••• {{ pay.card_last4 }}{% elif pay and pay.method() == 'EWALLET' %}Ví {{ pay.wallet_provider }}{% else %}Khi nhận hàng{% endif %}</b>
+      <small>{{ pay.status|vi if pay else '' }}</small></div>
+    <div><span>Tổng thanh toán</span><b>{{ order.total()|vnd }}</b></div>
+  </div>
+  {% if s.status.value == 'AWAITING_APPROVAL' %}<p class="note" style="max-width:560px;margin:16px auto 0">Chuyến {{ s.mode|vi|lower }} cần điều phối viên xác nhận an toàn trước khi xuất phát. Bạn sẽ thấy trạng thái cập nhật trong trang đơn hàng.</p>{% endif %}
+  <p class="muted" style="margin-top:14px">Giao tới {{ customer.name.display() }} · {{ address.one_line() }}</p>
+  <div style="display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap">
+    <a class="btn chili" href="{{ url_for('order.track', order_id=order.order_id) }}">Theo dõi đơn hàng</a>
+    <a class="btn ghost" href="{{ url_for('home.index') }}">Tiếp tục mua sắm</a>
+  </div>
+</div>
+{% endblock %}

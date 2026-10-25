@@ -1,0 +1,79 @@
+{% extends "ops_base.html" %}
+{# IWeatherService — mặc định OpenMeteoWeatherService: thời tiết tự cập nhật theo dự báo (Open-Meteo), làm mới mỗi 15 phút.
+   Điều phối viên chỉ ghi đè thủ công khi có sự cố / diễn tập, rồi bấm “Về tự động”. AI đọc ở mỗi lần đề xuất (BR-D06). #}
+{% block title %}Thời tiết · Kênh điều phối ChợBay{% endblock %}
+{% set drone = types|selectattr('mode.value', 'equalto', 'DRONE')|first %}
+{% set fcar = types|selectattr('mode.value', 'equalto', 'FLYING_CAR')|first %}
+{% block content %}
+<h1 class="ops-h1">Thời tiết khu vực giao hàng</h1>
+
+<section class="ops-card wx-src {{ 'manual' if info.mode == 'MANUAL' else ('bad' if info.error else 'auto') }}">
+  <div>
+    {% if info.mode == 'AUTO' and not info.error %}
+    <b>🛰️ Tự động theo dự báo · {{ info.source }}</b>
+    <div class="muted">Cập nhật lúc {{ info.updated_at.strftime('%H:%M') if info.updated_at else '—' }} · tự làm mới mỗi 15 phút · AI lấy thời tiết đúng tại địa chỉ giao của từng đơn</div>
+    {% elif info.mode == 'AUTO' %}
+    <b>⚠️ {{ info.error }}</b>
+    <div class="muted">{% if info.updated_at %}Đang dùng số liệu lúc {{ info.updated_at.strftime('%H:%M') }}{% else %}Đang dùng số liệu dự phòng (mưa 0 mm/h, gió 3 m/s){% endif %} · hệ thống tự thử lại sau 5 phút</div>
+    {% else %}
+    <b>✋ {{ info.source }}</b>
+    <div class="muted">Mọi đề xuất giao hàng mới đang dùng số liệu nhập tay bên dưới cho tới khi bấm “Về tự động”.</div>
+    {% endif %}
+  </div>
+  <form method="post">
+    {% if info.mode == 'MANUAL' and info.source != 'Trạm giả lập (WeatherStub)' %}<button class="btn" name="action" value="auto">Về tự động</button>
+    {% elif info.mode == 'AUTO' %}<button class="btn ghost" name="action" value="refresh">Làm mới</button>{% endif %}
+  </form>
+</section>
+
+<div class="ops-kpis" style="margin-top:14px">
+  <div class="kpi"><span>Lượng mưa hiện tại</span><b>{{ ('%g'|format(w.rain_mmh)).replace('.', ',') }} <small>mm/h</small></b><small>TP.HCM (trung tâm)</small></div>
+  <div class="kpi"><span>Tốc độ gió</span><b>{{ ('%g'|format(w.wind_ms)).replace('.', ',') }} <small>m/s</small></b><small>độ cao 10 m</small></div>
+  {% set dstop = w.wind_ms > drone.max_wind_ms or w.rain_mmh > drone.max_rain_mmh %}
+  <div class="kpi {{ 'warn' if dstop else 'ok' }}"><span>Drone</span><b>{{ 'Tạm ngưng' if dstop else 'Bay được' }}</b><small>gió ≤ {{ '%g'|format(drone.max_wind_ms) }} · mưa ≤ {{ '%g'|format(drone.max_rain_mmh) }}</small></div>
+  <div class="kpi"><span>Giao thông</span><b>{{ (w.traffic_index*100)|int }}%</b><small>{{ 'giờ cao điểm' if w.traffic_index >= 0.8 else 'bình thường' }} · {{ w.hour }}h</small></div>
+</div>
+
+<div class="ops-grid" style="margin-top:16px">
+  <section class="ops-card">
+    <h3>Dự báo 6 giờ tới</h3>
+    {% if hours %}
+    <table class="t wx-fc">
+      <tr><th>Giờ</th><th>Mưa</th><th>Khả năng</th><th>Gió</th><th>Drone</th><th>Ô tô bay</th></tr>
+      {% for h in hours %}
+      {% set d_ok = not (h.wind_ms > drone.max_wind_ms or h.rain_mmh > drone.max_rain_mmh) %}
+      {% set f_ok = not (h.wind_ms > fcar.max_wind_ms or h.rain_mmh > fcar.max_rain_mmh) %}
+      <tr><td><b>{{ h.time.strftime('%H:%M') }}</b></td><td>{{ ('%g'|format(h.rain_mmh)).replace('.', ',') }} mm/h</td><td>{{ h.rain_prob }}%</td>
+        <td>{{ ('%g'|format(h.wind_ms)).replace('.', ',') }} m/s</td>
+        <td>{% if d_ok %}<span class="status s-DELIVERED">Bay được</span>{% else %}<span class="status s-FAILED">Ngưng</span>{% endif %}</td>
+        <td>{% if f_ok %}<span class="status s-DELIVERED">Bay được</span>{% else %}<span class="status s-FAILED">Ngưng</span>{% endif %}</td></tr>
+      {% endfor %}
+    </table>
+    <p class="muted" style="font-size:13px">Nguồn: Open-Meteo (CC BY 4.0). Dùng để điều phối viên chuẩn bị trước; AI luôn dùng số liệu hiện tại khi đề xuất.</p>
+    {% else %}
+    <p class="muted">{% if info.mode == 'MANUAL' and info.source == 'Trạm giả lập (WeatherStub)' %}Chế độ kiểm thử (CHOBAY_WEATHER=stub) không có dự báo.{% else %}Chưa lấy được dự báo — kiểm tra kết nối mạng.{% endif %}</p>
+    {% endif %}
+
+    <details class="wx-override" {{ 'open' if info.mode == 'MANUAL' }}>
+      <summary>Ghi đè thủ công (sự cố, diễn tập bão)</summary>
+      <form method="post" class="wx-form" style="margin-top:10px">
+        <input type="hidden" name="action" value="override">
+        <label class="fld">Lượng mưa (mm/h)<input name="rain" type="number" step="0.5" min="0" max="100" value="{{ '%g'|format(w.rain_mmh) }}"></label>
+        <label class="fld">Tốc độ gió (m/s)<input name="wind" type="number" step="0.5" min="0" max="40" value="{{ '%g'|format(w.wind_ms) }}"></label>
+        <button class="btn">Áp dụng</button>
+      </form>
+    </details>
+  </section>
+  <section class="ops-card">
+    <h3>Ảnh hưởng tới phương tiện</h3>
+    <table class="t">
+      <tr><th>Phương tiện</th><th>Ngưỡng</th><th>Lúc này</th></tr>
+      {% for v in types %}{% set stop = w.wind_ms > v.max_wind_ms or w.rain_mmh > v.max_rain_mmh %}
+      <tr><td>{{ v.name_vi.split(' (')[0] }}</td>
+        <td class="muted">{% if v.max_wind_ms < 99 %}gió ≤ {{ '%g'|format(v.max_wind_ms) }} · mưa ≤ {{ '%g'|format(v.max_rain_mmh) }}{% else %}không giới hạn{% endif %}</td>
+        <td>{% if stop %}<span class="status s-FAILED">Tạm ngưng</span>{% else %}<span class="status s-DELIVERED">Hoạt động</span>{% endif %}</td></tr>
+      {% endfor %}
+    </table>
+  </section>
+</div>
+{% endblock %}

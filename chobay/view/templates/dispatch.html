@@ -1,0 +1,48 @@
+{% extends "ops_base.html" %}
+{# UC15 + UC17 (một phần): danh sách chuyến theo trạng thái; thao tác Duyệt chuyến / Cho xuất phát ngay trên dòng. #}
+{% block title %}Quản lý chuyến giao · Kênh điều phối ChợBay{% endblock %}
+{% block content %}
+<h1 class="ops-h1">Quản lý chuyến giao</h1>
+<div class="ops-kpis">
+  <a href="{{ url_for('dispatch.board', status='AWAITING_APPROVAL') }}" class="kpi warn"><span>Chờ duyệt</span><b>{{ counts.AWAITING_APPROVAL }}</b><small>Ô tô bay, tàu ngầm, AI chưa chắc</small></a>
+  <a href="{{ url_for('dispatch.board', status='ASSIGNED') }}" class="kpi"><span>Chờ xuất phát</span><b>{{ counts.ASSIGNED }}</b><small>Đã có phương tiện</small></a>
+  <a href="{{ url_for('dispatch.board', status='DELIVERED') }}" class="kpi ok"><span>Đã giao</span><b>{{ counts.DELIVERED }}</b><small>Tổng {{ counts.ALL }} chuyến</small></a>
+  <a href="{{ url_for('dispatch.fleet') }}" class="kpi"><span>Phương tiện rảnh</span><b>{{ idle }}/{{ fleet_total }}</b><small>Mưa {{ '%g'|format(w.rain_mmh) }} mm/h · gió {{ '%g'|format(w.wind_ms) }} m/s</small></a>
+</div>
+<div class="ops-card">
+  <div class="ops-tabs">{% for key, label in tabs %}
+    <a href="{{ url_for('dispatch.board', status=key) if key != 'ALL' else url_for('dispatch.board') }}" class="{{ 'on' if tab == key }}">{{ label }} <span>{{ counts[key] }}</span></a>{% endfor %}</div>
+  {% if q %}<p class="muted" style="margin:12px 0 0">Kết quả cho “{{ q }}” · <a class="link" href="{{ url_for('dispatch.board') }}">Xóa tìm kiếm</a></p>{% endif %}
+  {% if not rows %}
+  <div class="empty" style="margin:16px 0 0"><div class="empty-ico">📭</div><div><b>Không có chuyến nào ở mục này.</b><div class="muted">Đơn mới sẽ hiện ngay khi khách đặt hàng.</div></div></div>
+  {% else %}
+  <table class="t ops-table">
+    <tr><th>Mã đơn</th><th>Khách hàng · giao tới</th><th>Phương thức</th><th>Thời gian · phí</th><th>Trạng thái</th><th style="text-align:right">Thao tác</th></tr>
+    {% for r in rows %}{% set s = r.s %}
+    <tr{% if s.status.value == 'AWAITING_APPROVAL' %} class="hot"{% endif %}>
+      <td><a class="link" href="{{ url_for('dispatch.detail', order_id=r.order.order_id) }}">#{{ r.order.order_id }}</a>
+        <div class="muted">{{ r.order.order_date.strftime('%H:%M %d/%m') }}</div></td>
+      <td>{{ r.customer.name.display() }}<div class="muted">{{ r.address.district }} · {{ r.address.area_type|vi }}</div></td>
+      <td><b>{{ s.mode|vi }}</b><div class="muted">từ {{ r.hub.name }}</div></td>
+      <td>{{ s.eta_minutes }} phút<div class="muted">{{ s.fee|vnd }} · {{ r.order.items|length }} món</div></td>
+      <td><span class="status s-{{ s.status.value }}">{{ s.status|vi }}</span>
+        {% if s.ai_confidence < 0.6 and s.status.value == 'AWAITING_APPROVAL' %}<div class="muted">AI tin cậy {{ (s.ai_confidence*100)|int }}%</div>{% endif %}</td>
+      <td class="act">
+        {% if s.status.value == 'AWAITING_APPROVAL' %}<form method="post" action="{{ url_for('dispatch.approve', order_id=r.order.order_id) }}"><button class="btn leaf sm">Duyệt chuyến</button></form>
+        {% elif s.status.value == 'ASSIGNED' %}<form method="post" action="{{ url_for('dispatch.depart', order_id=r.order.order_id) }}"><button class="btn sm">Cho xuất phát</button></form>{% endif %}
+        <a class="btn ghost sm" href="{{ url_for('dispatch.detail', order_id=r.order.order_id) }}">Chi tiết</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% if pages > 1 %}
+  <div class="pager"><span class="muted">{{ total }} chuyến · trang {{ page_no }}/{{ pages }}</span>
+    {% set base = {'status': tab} if tab != 'ALL' else {} %}
+    {% if page_no > 1 %}<a class="btn ghost sm" href="{{ url_for('dispatch.board', page=page_no - 1, q=q or None, **base) }}">‹ Trước</a>{% endif %}
+    {% for n in range(1, pages + 1) %}<a class="pg{{ ' on' if n == page_no }}" href="{{ url_for('dispatch.board', page=n, q=q or None, **base) }}">{{ n }}</a>{% endfor %}
+    {% if page_no < pages %}<a class="btn ghost sm" href="{{ url_for('dispatch.board', page=page_no + 1, q=q or None, **base) }}">Sau ›</a>{% endif %}
+  </div>
+  {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

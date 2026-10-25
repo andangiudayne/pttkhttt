@@ -1,0 +1,154 @@
+=== ChợBay — AI Search Demo ===
+
+[TEXT] 'nuoc dua' → tokens=['nuoc', 'dua'] max_price=None
+   Nước dừa Vietcoco hộp 330ml                   S=0.993 (text 1.00, image 0.00, business 0.96)
+
+[TEXT] 'sữa tươi dưới 40k' → tokens=['sua', 'tuoi'] max_price=40000
+   Sữa tươi tiệt trùng Vinamilk 100% hộp 1L      S=0.998 (text 1.00, image 0.00, business 0.99)
+   Bánh mì tươi Kinh Đô bơ sữa 55g               S=0.792 (text 0.75, image 0.00, business 0.96)
+   Sữa đặc Ngôi Sao Phương Nam 380g              S=0.496 (text 0.38, image 0.00, business 0.98)
+
+[TEXT] 'mi tom chua cay' → tokens=['mi', 'goi', 'chua', 'cay'] max_price=None
+   Mì Kim Chi Acecook gói 75g                    S=0.712 (text 0.65, image 0.00, business 0.98)
+   Bún bò Huế ăn liền Vifon 65g                  S=0.643 (text 0.56, image 0.00, business 0.96)
+   Mì không chiên Mikochi vị sườn heo            S=0.561 (text 0.46, image 0.00, business 0.97)
+
+[VOICE] 'tìm giúp mình kem sầu riêng nha' → tokens=['kem', 'sau', 'rieng'] max_price=None
+   Kem que sầu riêng hộp 4 que                   S=0.894 (text 0.88, image 0.00, business 0.97)
+   Sầu riêng Ri6 nguyên trái (~2,6kg)            S=0.698 (text 0.62, image 0.00, business 0.99)
+
+[VOICE] 'mua cho tôi ít tôm tươi' → tokens=['tom', 'tuoi'] max_price=None
+   Tôm sú tươi 500g                              S=0.996 (text 1.00, image 0.00, business 0.98)
+   Thùng 48 hộp sữa tươi Vinamilk 180ml          S=0.499 (text 0.38, image 0.00, business 0.99)
+   Sầu riêng Ri6 nguyên trái (~2,6kg)            S=0.498 (text 0.38, image 0.00, business 0.99)
+
+[IMAGE] 'thanh_long_khach_chup.jpg' → tokens=[] max_price=None
+   Thanh long ruột trắng 1kg                     S=0.412 (text 0.00, image 0.31, business 0.98)
+   Tôm sú tươi 500g                              S=0.348 (text 0.00, image 0.24, business 0.98)
+   Sầu riêng Ri6 nguyên trái (~2,6kg)            S=0.343 (text 0.00, image 0.23, business 0.99)
+
+[IMAGE] 'sau_rieng_khach_chup.jpg' → tokens=[] max_price=None
+   Sầu riêng Ri6 nguyên trái (~2,6kg)            S=0.391 (text 0.00, image 0.29, business 0.99)
+   Tôm sú tươi 500g                              S=0.302 (text 0.00, image 0.18, business 0.98)
+   Sữa chua dâu Vinamilk lốc 4 hộp               S=0.286 (text 0.00, image 0.16, business 0.98)
+
+[IMAGE] 'rau_muong_khach_chup.jpg' → tokens=[] max_price=None
+   Rau muống 500g                                S=0.416 (text 0.00, image 0.32, business 0.96)
+   Tôm sú tươi 500g                              S=0.381 (text 0.00, image 0.27, business 0.98)
+   Thịt ba chỉ heo 500g                          S=0.313 (text 0.00, image 0.20, business 0.97)
+
+[MULTI] 'trái cây' → tokens=['trai', 'cay'] max_price=None
+   Thanh long ruột trắng 1kg                     S=0.722 (text 1.00, image 0.31, business 0.98)
+   Sầu riêng Ri6 nguyên trái (~2,6kg)            S=0.690 (text 1.00, image 0.23, business 0.99)
+   Xoài cát Hòa Lộc 1kg                          S=0.687 (text 1.00, image 0.22, business 0.98)
+
+[TEXT] 'ca phe sua' → tokens=['ca', 'phe', 'sua'] max_price=None
+   Cà phê G7 3in1 bịch 22 gói                    S=0.995 (text 1.00, image 0.00, business 0.98)
+
+[IMAGE] 'trung_ga_khach_chup.jpg' → tokens=[] max_price=None
+   Xoài cát Hòa Lộc 1kg                          S=0.432 (text 0.00, image 0.33, business 0.98)
+   Trứng gà vỉ 10 quả                            S=0.403 (text 0.00, image 0.30, business 0.98)
+   Rau muống 500g                                S=0.320 (text 0.00, image 0.21, business 0.96)
+
+[IMAGE] 'tom_khach_chup.jpg' → tokens=[] max_price=None
+   Tôm sú tươi 500g                              S=0.585 (text 0.00, image 0.51, business 0.98)
+   Rau muống 500g                                S=0.406 (text 0.00, image 0.31, business 0.96)
+   Thịt ba chỉ heo 500g                          S=0.315 (text 0.00, image 0.20, business 0.97)
+
+[IMAGE] 'ca_basa_khach_chup.jpg' → tokens=[] max_price=None
+   Trứng gà vỉ 10 quả                            S=0.422 (text 0.00, image 0.32, business 0.98)
+   Thịt ba chỉ heo 500g                          S=0.340 (text 0.00, image 0.23, business 0.97)
+   Sầu riêng Ri6 nguyên trái (~2,6kg)            S=0.282 (text 0.00, image 0.16, business 0.99)
+
+[TEXT] 'mì tôm chua cay' → tokens=['mi', 'goi', 'chua', 'cay'] max_price=None
+   Mì Kim Chi Acecook gói 75g                    S=0.712 (text 0.65, image 0.00, business 0.98)
+   Bún bò Huế ăn liền Vifon 65g                  S=0.643 (text 0.56, image 0.00, business 0.96)
+   Mì không chiên Mikochi vị sườn heo            S=0.561 (text 0.46, image 0.00, business 0.97)
+
+[TEXT] 'sua chau dau' → tokens=['sua', 'chau', 'dau'] max_price=None
+   Sữa chua dâu Vinamilk lốc 4 hộp               S=0.595 (text 0.50, image 0.00, business 0.98)
+
+[VOICE] 'cho em một vỉ trứng gà' → tokens=['vi', 'trung', 'ga'] max_price=None
+   Trứng gà vỉ 10 quả                            S=0.895 (text 0.88, image 0.00, business 0.98)
+
+Success rate = 14/16 = 88%
+
+=== ChợBay — AI Delivery Dispatcher Demo ===
+ETA model MAE (test) = 6.51 phút · Risk model AUC = 0.886
+
+S1 Chung cư Nhà Bè — sữa chua + bánh mì (nhẹ, mát)  [FAST] weight=0.53 kg, coldest=CHILLED
+   ✓ EBIKE       ETA   36′  fee   31,000  risk  1.2%  score 0.2025
+   ✓ AUTO_CAR    ETA   45′  fee   32,000  risk  1.3%  score 0.2488
+   ✓ LOCKER      ETA   45′  fee        0  risk  1.8%  score 0.3741
+   ✓ FLYING_CAR  ETA   60′  fee  207,000  risk  1.5%  score 0.4669
+   ✗ DRONE       ETA   88′  fee   49,000  risk 84.0%  score      -  ← BR-D02 Quãng đường 16.9 km > tầm 12 km
+   ✗ ROBOT       ETA   49′  fee   14,000  risk 57.4%  score      -  ← BR-D02 Quãng đường 4.03 km > tầm 3 km
+   ✗ SUBMARINE   ETA    0′  fee        0  risk  0.0%  score      -  ← BR-D12 Không còn phương tiện rảnh
+   ✗ AUTO_BOAT   ETA   86′  fee   66,000  risk  2.0%  score      -  ← BR-D03 Không phục vụ khu vực URBAN_HIGHRISE
+   ⇒ Chọn EBIKE (Shipper xe máy điện) — ETA 36′. phí 31.000đ, rủi ro 1%, ưu tiên FAST; phương án 2 là AUTO_CAR (điểm 0.2488). Loại: DRONE: BR-D02, ROBOT: BR-D02, SUBMARINE: BR-D12, AUTO_BOAT: BR-D03.  (conf 0.62, human=False)
+
+S2 Chung cư Nhà Bè — 2 thùng sữa 48 hộp (19,2 kg)  [CHEAP] weight=19.2 kg, coldest=AMBIENT
+   ✓ EBIKE       ETA   36′  fee   31,000  risk  1.2%  score 0.1445
+   ✓ AUTO_CAR    ETA   45′  fee   32,000  risk  1.3%  score 0.1628
+   ✓ LOCKER      ETA   45′  fee        0  risk  1.8%  score 0.2241
+   ✓ FLYING_CAR  ETA   60′  fee  207,000  risk  1.5%  score 0.6809
+   ✗ DRONE       ETA   88′  fee   49,000  risk 84.0%  score      -  ← BR-D01 Đơn nặng 19.2 kg > tải tối đa 2.5 kg
+   ✗ ROBOT       ETA   49′  fee   14,000  risk 57.4%  score      -  ← BR-D01 Đơn nặng 19.2 kg > tải tối đa 15 kg
+   ✗ SUBMARINE   ETA    0′  fee        0  risk  0.0%  score      -  ← BR-D12 Không còn phương tiện rảnh
+   ✗ AUTO_BOAT   ETA   86′  fee   66,000  risk  2.0%  score      -  ← BR-D03 Không phục vụ khu vực URBAN_HIGHRISE
+   ⇒ Chọn EBIKE (Shipper xe máy điện) — ETA 36′. phí 31.000đ, rủi ro 1%, ưu tiên CHEAP; phương án 2 là AUTO_CAR (điểm 0.1628). Loại: DRONE: BR-D01, ROBOT: BR-D01, SUBMARINE: BR-D12, AUTO_BOAT: BR-D03.  (conf 0.57, human=True)
+
+S3 Xã đảo Thạnh An — tôm + kem sầu riêng + gạo  [FAST] weight=3.4 kg, coldest=FROZEN
+   ✗ DRONE       ETA  177′  fee  100,000  risk 100.0%  score      -  ← BR-D01 Đơn nặng 3.4 kg > tải tối đa 2.5 kg
+   ✗ ROBOT       ETA  193′  fee   81,000  risk 100.0%  score      -  ← BR-D02 Quãng đường 48.66 km > tầm 3 km
+   ✗ AUTO_CAR    ETA  187′  fee  166,000  risk  8.8%  score      -  ← BR-D03 Không phục vụ khu vực ISLAND
+   ✗ FLYING_CAR  ETA  145′  fee  488,000  risk 100.0%  score      -  ← BR-D02 Quãng đường 45.97 km > tầm 40 km
+   ✗ SUBMARINE   ETA    0′  fee        0  risk  0.0%  score      -  ← BR-D12 Không còn phương tiện rảnh
+   ✗ AUTO_BOAT   ETA  208′  fee  163,000  risk 98.0%  score      -  ← BR-D02 Quãng đường 53.35 km > tầm 40 km
+   ✗ EBIKE       ETA  185′  fee  210,000  risk 100.0%  score      -  ← BR-D02 Quãng đường 48.66 km > tầm 20 km
+   ✗ LOCKER      ETA   47′  fee        0  risk  1.9%  score      -  ← BR-D03 Không phục vụ khu vực ISLAND
+   ⇒ Không phương thức nào thỏa luật — chuyển điều phối viên  (conf 0.0, human=True)
+
+S4 Ven sông Q12 — sầu riêng + xoài  [GREEN] weight=4.6 kg, coldest=AMBIENT
+   ✓ AUTO_BOAT   ETA   58′  fee   46,000  risk  2.0%  score   0.15
+   ✓ EBIKE       ETA   85′  fee   55,000  risk  1.6%  score 0.2092
+   ✓ AUTO_CAR    ETA   87′  fee   50,000  risk  1.1%  score 0.2786
+   ✗ DRONE       ETA   51′  fee   30,000  risk  4.4%  score      -  ← BR-D01 Đơn nặng 4.6 kg > tải tối đa 2.5 kg
+   ✗ ROBOT       ETA   84′  fee   23,000  risk 100.0%  score      -  ← BR-D02 Quãng đường 10.12 km > tầm 3 km
+   ✗ FLYING_CAR  ETA   58′  fee  185,000  risk  1.7%  score      -  ← BR-D03 Không phục vụ khu vực RIVERSIDE
+   ✗ SUBMARINE   ETA    0′  fee        0  risk  0.0%  score      -  ← BR-D12 Không còn phương tiện rảnh
+   ✗ LOCKER      ETA   45′  fee        0  risk  1.8%  score      -  ← BR-D03 Không phục vụ khu vực RIVERSIDE
+   ⇒ Chọn AUTO_BOAT (Xuồng tự hành trên sông) — ETA 58′. phí 46.000đ, rủi ro 2%, ưu tiên GREEN; phương án 2 là EBIKE (điểm 0.2092). Loại: DRONE: BR-D01, ROBOT: BR-D02, FLYING_CAR: BR-D03, SUBMARINE: BR-D12, LOCKER: BR-D03.  (conf 0.63, human=False)
+
+S5 Thủ Dầu Một — cá basa đông lạnh 3 kg  [FAST] weight=3.0 kg, coldest=FROZEN
+   ✓ FLYING_CAR  ETA   65′  fee  280,000  risk  2.6%  score 0.5782
+   ✓ AUTO_CAR    ETA  160′  fee  100,000  risk  1.4%  score 0.9407
+   ✗ DRONE       ETA  102′  fee   54,000  risk 99.5%  score      -  ← BR-D01 Đơn nặng 3.0 kg > tải tối đa 2.5 kg
+   ✗ ROBOT       ETA  140′  fee   48,000  risk 100.0%  score      -  ← BR-D02 Quãng đường 26.54 km > tầm 3 km
+   ✗ SUBMARINE   ETA    0′  fee        0  risk  0.0%  score      -  ← BR-D12 Không còn phương tiện rảnh
+   ✗ AUTO_BOAT   ETA  119′  fee   92,000  risk  3.6%  score      -  ← BR-D03 Không phục vụ khu vực SUBURBAN
+   ✗ EBIKE       ETA  138′  fee  121,000  risk 57.1%  score      -  ← BR-D02 Quãng đường 26.54 km > tầm 20 km
+   ✗ LOCKER      ETA   45′  fee        0  risk  1.8%  score      -  ← BR-D03 Không phục vụ khu vực SUBURBAN
+   ⇒ Chọn FLYING_CAR (Ô tô bay chở hàng (eVTOL)) — ETA 65′. phí 280.000đ, rủi ro 3%, ưu tiên FAST; phương án 2 là AUTO_CAR (điểm 0.9407). Loại: DRONE: BR-D01, ROBOT: BR-D02, SUBMARINE: BR-D12, AUTO_BOAT: BR-D03, EBIKE: BR-D02, LOCKER: BR-D03.  (conf 0.99, human=True)
+
+S6 Thủ Dầu Một — sầu riêng (mùi mạnh)  [FAST] weight=2.6 kg, coldest=AMBIENT
+   ✓ AUTO_CAR    ETA  160′  fee  100,000  risk  1.4%  score 0.8573
+   ✗ DRONE       ETA  102′  fee   54,000  risk 99.5%  score      -  ← BR-D01 Đơn nặng 2.6 kg > tải tối đa 2.5 kg
+   ✗ ROBOT       ETA  140′  fee   48,000  risk 100.0%  score      -  ← BR-D02 Quãng đường 26.54 km > tầm 3 km
+   ✗ FLYING_CAR  ETA   65′  fee  280,000  risk  2.6%  score      -  ← BR-D09 Hàng mùi mạnh (sầu riêng) không đi khoang ô tô bay dùng chung
+   ✗ SUBMARINE   ETA    0′  fee        0  risk  0.0%  score      -  ← BR-D12 Không còn phương tiện rảnh
+   ✗ AUTO_BOAT   ETA  119′  fee   92,000  risk  3.6%  score      -  ← BR-D03 Không phục vụ khu vực SUBURBAN
+   ✗ EBIKE       ETA  138′  fee  121,000  risk 57.1%  score      -  ← BR-D02 Quãng đường 26.54 km > tầm 20 km
+   ✗ LOCKER      ETA   45′  fee        0  risk  1.8%  score      -  ← BR-D03 Không phục vụ khu vực SUBURBAN
+   ⇒ Chọn AUTO_CAR (Xe tự lái (van điện không người lái)) — ETA 160′. phí 100.000đ, rủi ro 1%, ưu tiên FAST. Loại: DRONE: BR-D01, ROBOT: BR-D02, FLYING_CAR: BR-D09, SUBMARINE: BR-D12, AUTO_BOAT: BR-D03, EBIKE: BR-D02, LOCKER: BR-D03.  (conf 0.99, human=False)
+
+S7 Nhà phố Q1 — trứng + rau, trời mưa to  [FAST] weight=1.15 kg, coldest=CHILLED
+   ✓ LOCKER      ETA   45′  fee        0  risk  1.8%  score 0.3746
+   ✓ EBIKE       ETA   63′  fee   44,000  risk  9.9%  score 0.4239
+   ✓ AUTO_CAR    ETA   81′  fee   41,000  risk  3.3%  score 0.4449
+   ✗ DRONE       ETA   62′  fee   37,000  risk 100.0%  score      -  ← BR-D06 Thời tiết vượt ngưỡng (gió 11 m/s, mưa 25 mm/h)
+   ✗ ROBOT       ETA   58′  fee   19,000  risk 100.0%  score      -  ← BR-D02 Quãng đường 7.15 km > tầm 3 km
+   ✗ FLYING_CAR  ETA   59′  fee  161,000  risk 100.0%  score      -  ← BR-D06 Thời tiết vượt ngưỡng (gió 11 m/s, mưa 25 mm/h)
+   ✗ SUBMARINE   ETA    0′  fee        0  risk  0.0%  score      -  ← BR-D12 Không còn phương tiện rảnh
+   ✗ AUTO_BOAT   ETA   56′  fee   44,000  risk 60.3%  score      -  ← BR-D03 Không phục vụ khu vực URBAN_STREET
+   ⇒ Chọn LOCKER (Tủ khóa thông minh (tự nhận)) — ETA 45′. phí 0đ, rủi ro 2%, ưu tiên FAST; phương án 2 là EBIKE (điểm 0.4239). Loại: DRONE: BR-D06, ROBOT: BR-D02, FLYING_CAR: BR-D06, SUBMARINE: BR-D12, AUTO_BOAT: BR-D03.  (conf 0.62, human=False)

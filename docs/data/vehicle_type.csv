@@ -1,0 +1,9 @@
+﻿mode,name_vi,max_payload_kg,max_range_km,speed_kmh,has_cooler,has_freezer,base_fee,fee_per_km,co2_g_per_km,max_wind_ms,max_rain_mmh,needs_approval,allowed_areas
+AUTO_BOAT,Xuồng tự hành trên sông,100.0,40.0,20.0,1,0,30000,2500,12,15.0,20.0,0,RIVERSIDE
+AUTO_CAR,Xe tự lái (van điện không người lái),300.0,60.0,30.0,1,1,20000,3000,40,25.0,50.0,0,"URBAN_HIGHRISE,URBAN_STREET,SUBURBAN,RIVERSIDE"
+DRONE,Drone giao hàng,2.5,12.0,60.0,1,0,15000,2000,8,10.0,2.0,0,"URBAN_HIGHRISE,URBAN_STREET,SUBURBAN,RIVERSIDE"
+EBIKE,Shipper xe máy điện,30.0,20.0,22.0,1,0,15000,4000,15,20.0,30.0,0,"URBAN_HIGHRISE,URBAN_STREET,SUBURBAN,RIVERSIDE"
+FLYING_CAR,Ô tô bay chở hàng (eVTOL),150.0,40.0,120.0,1,1,120000,8000,60,12.0,5.0,1,"URBAN_HIGHRISE,URBAN_STREET,SUBURBAN"
+LOCKER,Tủ khóa thông minh (tự nhận),25.0,1.0,0.0,1,1,0,0,0,99.0,999.0,0,"URBAN_HIGHRISE,URBAN_STREET"
+ROBOT,Robot giao hàng vỉa hè,15.0,3.0,6.0,1,0,8000,1500,3,20.0,10.0,0,"URBAN_HIGHRISE,URBAN_STREET"
+SUBMARINE,Tàu ngầm tự hành chở hàng (AUV),200.0,120.0,15.0,1,1,150000,4000,20,99.0,999.0,1,ISLAND

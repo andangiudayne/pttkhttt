@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="banner">
+    <h1>Đi chợ trên mây — giao tới cả xã đảo.</h1>
+    <p>AI chọn phương tiện hợp với từng món: kem sầu riêng đi khoang cấp đông, trứng đi robot êm, đơn ra đảo Thạnh An đi tàu ngầm tự hành.</p>
+    <div class="fleet">
+      {% for v in fleet %}<div><b>{{ v.name_vi.split('(')[0] }}</b>≤ {{ ('%g'|format(v.max_payload_kg)).replace('.', ',') }} kg{% if v.max_range_km > 1 %} · {{ v.max_range_km|int }} km{% endif %}</div>{% endfor %}
+    </div>
+  </div>
+  <div class="promo">
+    <h2 style="margin-top:0">Tìm theo cách bạn thích</h2>
+    <p class="muted">Gõ không dấu “nuoc mam”, nói “mua cho tôi mì tôm chua cay”, hoặc chụp ảnh trái cây để tìm món giống nhất.</p>
+    <table class="t" style="margin-top:14px">
+      <tr><th>Kiểu</th><th>Ví dụ</th></tr>
+      <tr><td>Gõ chữ</td><td>sữa tươi dưới 40k</td></tr>
+      <tr><td>Giọng nói</td><td>“tìm giúp mình kem sầu riêng”</td></tr>
+      <tr><td>Hình ảnh</td><td>ảnh chụp trái thanh long</td></tr>
+    </table>
+  </div>
+</section>
+<h2>{% if active_cat %}{{ (categories|selectattr('category_id','equalto',active_cat)|first).name }}{% else %}Hôm nay có gì ở ChợBay{% endif %}</h2>
+<div class="grid">{% for p in products %}{% include "_card.html" %}{% endfor %}</div>
+{% endblock %}

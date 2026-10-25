@@ -1,0 +1,6 @@
+﻿hub_id,name,hub_type,latitude,longitude,transfer_min
+1,Kho tối ChợBay Quận 7,DARK_STORE,10.734,106.722,0
+2,Drone port Thủ Đức,DRONE_PORT,10.85,106.772,25
+3,Vertiport Tân Bình,VERTIPORT,10.8,106.66,25
+4,Cảng tàu ngầm Cần Giờ,SEA_DOCK,10.411,106.955,70
+5,Bến xuồng Thanh Đa,RIVER_DOCK,10.815,106.718,20

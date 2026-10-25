@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{# UC09 Xem / theo dõi đơn — danh sách “Đơn mua” của chính khách (không lộ đơn người khác, NFR03). #}
+{% block title %}Đơn mua · ChợBay{% endblock %}
+{% block content %}
+<h2>Đơn mua</h2>
+<div class="ops-tabs cust-tabs">{% for key, label, _ in tabs %}
+  <a href="{{ url_for('order.my_orders', tab=key) if key != 'ALL' else url_for('order.my_orders') }}" class="{{ 'on' if tab == key }}">{{ label }} <span>{{ counts[key] }}</span></a>{% endfor %}</div>
+{% if not rows %}
+<div class="empty" style="margin-top:16px"><div class="empty-ico">🧾</div><div><b>Chưa có đơn hàng nào ở mục này.</b>
+  <div class="muted" style="margin-top:6px"><a class="chip" href="{{ url_for('home.index') }}">Mua sắm ngay</a></div></div></div>
+{% else %}
+<div class="orders" style="margin-top:16px">
+{% for r in rows %}{% set o = r.order %}{% set s = r.s %}
+  <div class="order-box">
+    <div class="ob-head"><span><b>Đơn #{{ o.order_id }}</b> <span class="muted">· {{ o.order_date.strftime('%H:%M %d/%m/%Y') }} · {{ s.mode|vi }}</span></span>
+      <span class="status s-{{ s.status.value }}">{{ s.status|vi }}</span></div>
+    {% for i in o.items %}
+    <div class="ob-item"><img src="{{ url_for('static', filename='img/products/' ~ i.product.image_path) }}" alt="">
+      <span>{{ i.product.name }}<br><span class="muted">× {{ i.quantity }}</span></span><span>{{ i.line_total()|vnd }}</span></div>
+    {% endfor %}
+    <div class="ob-foot"><span class="muted">{{ o.items|length }} sản phẩm</span>
+      <span>Thành tiền: <b class="pr">{{ o.total()|vnd }}</b></span>
+      <span class="ob-act">{% if s.status.value == 'DELIVERED' %}<form method="post" action="{{ url_for('order.reorder', order_id=o.order_id) }}" style="display:inline"><button class="btn ghost sm">Mua lại</button></form>{% endif %}
+        <a class="btn chili sm" href="{{ url_for('order.track', order_id=o.order_id) }}">Xem chi tiết</a></span></div>
+  </div>
+{% endfor %}
+</div>
+{% endif %}
+{% endblock %}

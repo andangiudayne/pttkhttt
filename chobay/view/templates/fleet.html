@@ -1,0 +1,19 @@
+{% extends "ops_base.html" %}
+{# UC17 Giám sát đội phương tiện (một phần): xem từng chiếc theo hub, trạng thái rảnh / đang chạy, pin. #}
+{% block title %}Đội phương tiện · Kênh điều phối ChợBay{% endblock %}
+{% block content %}
+<h1 class="ops-h1">Đội phương tiện</h1>
+{% for hub, vs in groups %}
+<section class="ops-card" style="margin-bottom:14px">
+  <div class="co-head"><h3>{{ hub.name }}</h3><span class="muted">{{ vs|selectattr('status', 'equalto', 'IDLE')|list|length }}/{{ vs|length }} rảnh</span></div>
+  {% if vs %}
+  <div class="fleet-grid">{% for v in vs %}
+    <div class="veh {{ 'busy' if v.status != 'IDLE' }}">
+      <div class="veh-top"><b>{{ v.code }}</b><span class="status {{ 's-DELIVERED' if v.status == 'IDLE' else 's-IN_TRANSIT' }}">{{ 'Rảnh' if v.status == 'IDLE' else 'Đang chạy' }}</span></div>
+      <div class="muted">{{ v.name_vi.split(' (')[0] }}</div>
+      <div class="batt"><i style="width:{{ v.battery_pct }}%"></i></div><small class="muted">Pin {{ v.battery_pct }}% · tải {{ ('%g'|format(v.max_payload_kg)).replace('.', ',') }} kg · tầm {{ v.max_range_km|int }} km</small>
+    </div>{% endfor %}</div>
+  {% else %}<p class="muted">Chưa có phương tiện tại hub này.</p>{% endif %}
+</section>
+{% endfor %}
+{% endblock %}

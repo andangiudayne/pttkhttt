@@ -1,0 +1,22 @@
+{# Thẻ sản phẩm dùng chung cho trang chủ và trang kết quả tìm kiếm. Trong tìm kiếm có thêm `c` (ScoredCandidate) và `best`. #}
+<div class="card{% if best %} best{% endif %}">
+  <a class="ph" href="{{ url_for('home.product_detail', pid=p.product_id) }}">
+    <img src="{{ url_for('static', filename='img/products/' ~ p.image_path) }}" alt="{{ p.name }}" loading="lazy">
+    {% if best %}<span class="badge">Phù hợp nhất</span>{% endif %}
+  </a>
+  <div class="b">
+    <a class="n" href="{{ url_for('home.product_detail', pid=p.product_id) }}">{{ p.name }}</a>
+    <div class="tags">
+      {% if p.temp_class.value == 'FROZEN' %}<span class="tag FROZEN">Đông lạnh</span>{% elif p.temp_class.value == 'CHILLED' %}<span class="tag CHILLED">Giữ mát</span>{% endif %}
+      {% if p.strong_odor %}<span class="tag odor">Mùi mạnh</span>{% endif %}
+      {% if p.is_fragile %}<span class="tag fragile">Dễ vỡ</span>{% endif %}
+      <span class="tag">{{ ('%.2f'|format(p.weight_kg) if p.weight_kg < 1 else '%.1f'|format(p.weight_kg)).replace('.', ',') }} kg</span>
+    </div>
+    <div style="flex:1"></div>
+    <div class="buy">
+      <span class="pr">{{ p.price|vnd }}</span>
+      {% if p.stock > 0 %}<form method="post" action="{{ url_for('cart.add', pid=p.product_id) }}"><button class="btn chili">+ Giỏ</button></form>
+      {% else %}<span class="muted">Hết hàng</span>{% endif %}
+    </div>
+  </div>
+</div>

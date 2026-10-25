@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Đăng nhập · ChợBay{% endblock %}
+{% block content %}
+<div class="login">
+  <form method="post" action="{{ url_for('account.login') }}" class="panel">
+    <h2 style="margin-top:0">Đăng nhập</h2>
+    <p class="muted">Đăng nhập để đặt hàng và theo dõi đơn. Nhân viên điều phối dùng tài khoản nội bộ.</p>
+    <input type="hidden" name="next" value="{{ request.values.get('next', '') }}">
+    <label class="fld">Tên đăng nhập<input name="username" value="{{ username }}" autocomplete="username" required autofocus></label>
+    <label class="fld">Mật khẩu<input name="password" type="password" autocomplete="current-password" required></label>
+    <button class="btn chili" style="width:100%;padding:12px;font-size:16px">Đăng nhập</button>
+  </form>
+</div>
+{% endblock %}

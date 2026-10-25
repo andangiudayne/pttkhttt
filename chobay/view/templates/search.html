@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{# SearchUI / SearchResultView trong biểu đồ tuần tự 3.4: hiển thị kết quả sản phẩm (UC02) hoặc đơn hàng (UC19).
+   Trang chỉ hiện kết quả cho khách; biểu diễn truy vấn chung và điểm S được trình bày trong slide 3.4. #}
+{% block title %}{% if q %}{{ q }} — {% endif %}Tìm kiếm · ChợBay{% endblock %}
+{% block content %}
+<section class="sr-head">
+  {% if upload %}
+  <div class="sr-upload">
+    <img src="{{ upload.src }}" alt="Ảnh bạn đã tải lên">
+    <div>
+      <div class="muted">Tìm bằng hình ảnh{% if q %} · kèm từ khóa “{{ q }}”{% endif %}</div>
+      <h1>Sản phẩm giống ảnh của bạn</h1>
+      <button type="button" class="btn ghost" onclick="document.getElementById('img').click()">Đổi ảnh khác</button>
+    </div>
+  </div>
+  {% elif query and query.type == 'VOICE' %}
+  <div class="muted">🎤 Bạn đã nói</div>
+  <h1>“{{ q }}”</h1>
+  {% elif q %}
+  <div class="muted">Kết quả tìm kiếm cho</div>
+  <h1>“{{ q }}”</h1>
+  {% else %}
+  <h1>Tìm kiếm</h1>
+  {% endif %}
+  {% set partial = results and query and query.tokens and not upload and results[0].s_text < 0.5 %}
+  {% if partial %}<div class="sr-meta">Chưa có sản phẩm khớp đúng “{{ q }}”. Có thể bạn đang tìm:</div>
+  {% elif results %}<div class="sr-meta">{{ results|length }} sản phẩm phù hợp
+    {% if query and query.max_price %}<span class="chip on">Giá ≤ {{ query.max_price|vnd }}</span>{% endif %}</div>{% endif %}
+</section>
+
+{% if error %}
+<div class="empty">
+  <div class="empty-ico">🔎</div>
+  <div><b>{{ error }}</b>
+    <div class="muted" style="margin-top:6px">Gợi ý: <a class="chip" href="{{ url_for('search.search', q='sữa chua dâu') }}">sữa chua dâu</a>
+      <a class="chip" href="{{ url_for('search.search', q='mì tôm chua cay') }}">mì tôm chua cay</a>
+      <a class="chip" href="{{ url_for('search.search', q='trái cây') }}">trái cây</a></div></div>
+</div>
+{% endif %}
+
+
+{% if orders is not none %}
+<div class="orders">
+{% for o in orders %}
+  <a class="order-card" href="{{ url_for('order.track', order_id=o.order_id) }}">
+    <div><div class="muted">Đơn hàng #{{ o.order_id }} · {{ o.order_date.strftime('%d/%m/%Y %H:%M') }}</div>
+      <div class="order-title">{{ o.items|length }} sản phẩm · {{ o.total()|vnd }}</div>
+      <div class="thumbs">{% for i in o.items[:5] %}<img src="{{ url_for('static', filename='img/products/' ~ i.product.image_path) }}" alt="{{ i.product.name }}">{% endfor %}</div></div>
+    <div style="text-align:right"><span class="status s-{{ o.status.value }}">{{ o.status|vi }}</span><div class="link">Xem chi tiết →</div></div>
+  </a>
+{% else %}
+  <div class="empty"><div class="empty-ico">📦</div><div><b>Không tìm thấy đơn hàng nào của bạn khớp với yêu cầu.</b>
+    <div class="muted" style="margin-top:6px">Hãy kiểm tra lại mã đơn, hoặc thử “đơn hàng gần nhất”.</div></div></div>
+{% endfor %}
+</div>
+{% endif %}
+
+{% if results %}
+<div class="grid">
+{% for c in results %}{% set p = c.product %}{% set best = loop.first and not partial %}
+  {% include "_card.html" %}
+{% endfor %}
+</div>
+{% elif query and not error and query.intent != 'ORDER' %}
+<div class="empty"><div class="empty-ico">🛒</div><div><b>Chưa tìm thấy sản phẩm phù hợp.</b>
+  <div class="muted" style="margin-top:6px">{% if upload %}Thử chụp gần món hàng hơn, đủ sáng, hoặc gõ thêm tên món.{% else %}Thử từ khóa ngắn hơn hoặc tên khác của món hàng.{% endif %}</div></div></div>
+{% endif %}
+
+{% if recent %}
+<div class="recent"><span class="muted">Tìm gần đây</span>
+  {% for r in recent if r.mode not in ('IMAGE', 'MULTI') %}<a class="chip" href="{{ url_for('search.search', q=r.query, mode='TEXT') }}">{{ r.query }}</a>{% endfor %}</div>
+{% endif %}
+{% endblock %}

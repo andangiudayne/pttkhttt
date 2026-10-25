@@ -1,0 +1,60 @@
+{% extends "ops_base.html" %}
+{# UC15 Duyệt chuyến đặc biệt — luồng chính: 1 xem lý do AI → 2 kiểm thời tiết, bãi đáp → 3 Duyệt → 4 ASSIGNED, ghi approved_by → 5 Cho xuất phát. #}
+{% block title %}Chuyến đơn #{{ order.order_id }} · Kênh điều phối ChợBay{% endblock %}
+{% block content %}
+{% set pay = order.payment %}
+<nav class="crumbs" style="margin-top:0"><a href="{{ url_for('dispatch.board') }}">Quản lý chuyến giao</a> › Đơn #{{ order.order_id }}</nav>
+<div class="ops-head">
+  <div><h1 class="ops-h1" style="margin:4px 0">Đơn #{{ order.order_id }} <span class="status s-{{ s.status.value }}" style="vertical-align:middle">{{ s.status|vi }}</span></h1>
+    <div class="muted">Đặt lúc {{ order.order_date.strftime('%H:%M %d/%m/%Y') }} · {{ s.mode|vi }} · từ {{ hub.name }}</div></div>
+  <div class="ops-actions">
+    {% if s.status.value == 'AWAITING_APPROVAL' %}<form method="post" action="{{ url_for('dispatch.approve', order_id=order.order_id) }}"><button class="btn leaf">Duyệt chuyến</button></form>
+    {% elif s.status.value == 'ASSIGNED' %}<form method="post" action="{{ url_for('dispatch.depart', order_id=order.order_id) }}"><button class="btn">Cho xuất phát</button></form>{% endif %}
+  </div>
+</div>
+<div class="ops-grid">
+  <div class="ops-col">
+    <section class="ops-card">
+      <h3>Quyết định của AI</h3>
+      <div class="kpis" style="grid-template-columns:repeat(4,1fr)">
+        <div><span>Phương thức</span><b>{{ s.mode|vi }}</b></div>
+        <div><span>Thời gian · quãng đường</span><b>{{ s.eta_minutes }} phút · {{ ('%g'|format(s.distance_km)).replace('.', ',') }} km</b></div>
+        <div><span>Điểm (thấp = tốt)</span><b>{{ '%.3f'|format(s.ai_score) }}</b></div>
+        <div><span>Độ tin cậy</span><b>{{ (s.ai_confidence*100)|int }}%</b></div>
+      </div>
+      <p class="reason-full"><b>Lý do:</b> {{ s.ai_reason }}</p>
+      {% if s.status.value == 'AWAITING_APPROVAL' %}<p class="note">Cần duyệt vì {{ 'phương tiện ' ~ (s.mode|vi|lower) ~ ' luôn cần người xác nhận (BR-H1)' if s.mode.value in ['SUBMARINE', 'FLYING_CAR'] else 'độ tin cậy của AI dưới 60%' }}. Kiểm tra thời tiết và bãi đáp trước khi duyệt.</p>
+      <p class="muted" style="margin:6px 0 0">Thời tiết hiện tại tại nơi giao{% if w_info.mode == 'MANUAL' and w_info.source == 'Điều phối viên ghi đè' %} (đang ghi đè){% endif %}: mưa {{ '%g'|format(w.rain_mmh) }} mm/h · gió {{ '%g'|format(w.wind_ms) }} m/s
+        · bãi đáp gần nhất {{ ('%g'|format(address.nearest_vertiport_km)).replace('.', ',') }} km · <a href="{{ url_for('dispatch.weather') }}">Trạm thời tiết</a></p>
+      {% elif s.approved_by %}<p class="muted" style="margin:10px 0 0">Đã duyệt bởi <b>{{ s.approved_by }}</b></p>{% endif %}
+    </section>
+    <section class="ops-card">
+      <h3>Hành trình</h3>
+      {% include "_route_map.html" %}
+      <ul class="timeline" style="margin-top:12px">{% for e in s.events %}<li><b>{{ e.ts.strftime('%H:%M') }}</b> · {{ e.status|vi }}<br><span class="muted">{{ e.note }}</span></li>{% endfor %}</ul>
+    </section>
+  </div>
+  <div class="ops-col">
+    <section class="ops-card">
+      <h3>Khách hàng</h3>
+      <div><b>{{ customer.name.display() }}</b> <span class="muted">| {{ customer.phone }}</span></div>
+      <div class="muted" style="margin-top:4px">{{ address.label }} · {{ address.one_line() }}</div>
+      <div style="margin-top:6px"><span class="tag">{{ address.area_type|vi }}</span>
+        {% if address.has_drop_zone %}<span class="tag">Có điểm thả drone</span>{% endif %}
+        {% if address.nearest_vertiport_km < 5 %}<span class="tag">Bãi đáp {{ ('%g'|format(address.nearest_vertiport_km)).replace('.', ',') }} km</span>{% endif %}</div>
+    </section>
+    <section class="ops-card">
+      <h3>Hàng trong đơn</h3>
+      {% for i in order.items %}
+      <div class="line"><img src="{{ url_for('static', filename='img/products/' ~ i.product.image_path) }}" alt=""><span>{{ i.product.name }} <span class="muted">× {{ i.quantity }}</span>
+        {% if i.product.temp_class.value != 'AMBIENT' %}<span class="tag {{ i.product.temp_class.value }}">{{ 'Đông lạnh' if i.product.temp_class.value == 'FROZEN' else 'Giữ mát' }}</span>{% endif %}
+        {% if i.product.strong_odor %}<span class="tag odor">Mùi mạnh</span>{% endif %}</span><b>{{ i.line_total()|vnd }}</b></div>
+      {% endfor %}
+      <div class="sum" style="margin-top:8px"><span>Phí giao</span><span>{{ order.shipping_fee|vnd }}</span></div>
+      {% if order.discount %}<div class="sum"><span>Ưu đãi</span><span>−{{ order.discount|vnd }}</span></div>{% endif %}
+      <div class="sum total"><span>Tổng</span><b>{{ order.total()|vnd }}</b></div>
+      <div class="muted" style="margin-top:6px">Thanh toán: {% if pay and pay.method() == 'CREDIT' %}Thẻ •••• {{ pay.card_last4 }}{% elif pay and pay.method() == 'EWALLET' %}Ví {{ pay.wallet_provider }}{% else %}Khi nhận hàng{% endif %} · {{ pay.status|vi if pay else '' }}</div>
+    </section>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Đơn hàng #{{ order.order_id }} · ChợBay{% endblock %}
+{% block content %}
+<div class="sr-head">
+  <div class="muted">Đặt lúc {{ order.order_date.strftime('%H:%M · %d/%m/%Y') }}</div>
+  <h1>Đơn hàng #{{ order.order_id }} <span class="status s-{{ s.status.value }}" style="vertical-align:middle">{{ s.status|vi }}</span></h1>
+  <div class="sr-meta">Giao bằng <b>{{ s.mode|vi }}</b> · từ {{ hub.name }} tới {{ address.label }} ({{ address.district }})</div>
+</div>
+<div class="layout2">
+  <div class="panel">
+    {% include "_route_map.html" %}
+    <div class="kpis" style="margin-top:12px">
+      <div><span>Thời gian giao dự kiến</span><b>{{ s.eta_minutes }} phút</b></div>
+      <div><span>Quãng đường</span><b>{{ ('%g'|format(s.distance_km)).replace('.', ',') }} km</b></div>
+      <div><span>Phí giao</span><b>{{ s.fee|vnd }}</b></div>
+    </div>
+    {% if s.status.value == 'AWAITING_APPROVAL' %}<p class="note">Chuyến {{ s.mode|vi|lower }} cần điều phối viên xác nhận an toàn trước khi xuất phát. Chúng tôi sẽ cập nhật ngay khi chuyến được duyệt.</p>
+    {% elif s.approved_by and s.status.value in ['ASSIGNED', 'IN_TRANSIT'] %}<p class="note" style="background:#DCEBFA;color:#1D4F86">Điều phối viên đã xác nhận chuyến — phương tiện sẽ xuất phát ngay.</p>
+    {% elif s.status.value == 'DELIVERED' %}<p class="note" style="background:#DDF2E8;color:#156343">Đơn đã được giao thành công. Cảm ơn bạn đã mua sắm tại ChợBay!
+      <form method="post" action="{{ url_for('order.reorder', order_id=order.order_id) }}" style="display:inline;margin-left:10px"><button class="btn ghost sm">Mua lại cả đơn</button></form></p>{% endif %}
+  </div>
+  <div class="panel">
+    <h3 style="margin-top:0">Hành trình</h3>
+    <ul class="timeline">{% for e in s.events %}<li><b>{{ e.ts.strftime('%H:%M') }}</b> · {{ e.status|vi }}<br><span class="muted">{{ e.note }}</span></li>{% endfor %}</ul>
+    <h3>Hàng trong đơn</h3>
+    <table class="t">{% for i in order.items %}<tr><td>{{ i.product.name }}</td><td>×{{ i.quantity }}</td><td>{{ i.line_total()|vnd }}</td></tr>{% endfor %}
+      <tr><td>Phí giao</td><td></td><td>{{ order.shipping_fee|vnd }}</td></tr>
+      {% if order.discount %}<tr><td>Ưu đãi</td><td></td><td style="color:var(--leaf)">−{{ order.discount|vnd }}</td></tr>{% endif %}
+      <tr><td><b>Tổng thanh toán</b></td><td></td><td><b>{{ order.total()|vnd }}</b></td></tr>
+      {% set pay = order.payment %}
+      <tr><td>Thanh toán</td><td colspan="2">{% if pay and pay.method() == 'CREDIT' %}Thẻ •••• {{ pay.card_last4 }}{% elif pay and pay.method() == 'EWALLET' %}Ví {{ pay.wallet_provider }}{% else %}Khi nhận hàng{% endif %} · {{ pay.status|vi if pay else '' }}</td></tr></table>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{# UC05 Đặt hàng «include» UC06 AI đề xuất cách giao, UC07 Thanh toán, «extend» UC08 Ưu đãi.
+   Bố cục theo trang thanh toán của các sàn TMĐT: địa chỉ → sản phẩm → vận chuyển → ưu đãi → thanh toán → tổng tiền. #}
+{% block title %}Thanh toán · ChợBay{% endblock %}
+{% block content %}
+{% set WHY = {'BR-D01': 'Giỏ hàng vượt tải trọng', 'BR-D02': 'Địa chỉ quá xa', 'BR-D03': 'Không phục vụ khu vực này',
+              'BR-D04': 'Có hàng đông lạnh cần khoang cấp đông', 'BR-D05': 'Có hàng mát cần khoang giữ lạnh',
+              'BR-D06': 'Thời tiết hiện không an toàn', 'BR-D07': 'Địa chỉ không có điểm nhận drone',
+              'BR-D08': 'Không có bãi đáp gần địa chỉ', 'BR-D09': 'Có hàng mùi mạnh', 'BR-D10': 'Có hàng dễ vỡ, gió mạnh',
+              'BR-D11': 'Xã đảo chỉ đi được đường thủy', 'BR-D12': 'Phương tiện đang bận'} %}
+{% set ai = decision.chosen if decision else None %}
+{% set addr = me.addresses|selectattr('address_id', 'equalto', addr_id)|first %}
+{% set n_items = cart.items|sum(attribute='quantity') %}
+<nav class="crumbs"><a href="{{ url_for('cart.view') }}">Giỏ hàng</a> › Thanh toán</nav>
+<h2 style="margin-top:8px">Thanh toán</h2>
+<div class="co">
+  <div class="co-main">
+
+    {# ---------- 1. Địa chỉ nhận hàng ---------- #}
+    <section class="co-card">
+      <div class="co-head"><h3>📍 Địa chỉ nhận hàng</h3>
+        {% if me.addresses|length > 1 %}<button type="button" class="link" onclick="toggle('addr-list')">Thay đổi</button>{% endif %}</div>
+      <div class="addr"><b>{{ me.name.display() }}</b> <span class="muted">| {{ me.phone }}</span>
+        <div>{{ addr.one_line() }}</div>
+        <span class="tag">{{ addr.label }}</span> <span class="tag">{{ addr.area_type|vi }}</span></div>
+      <form method="get" id="addr-list" hidden style="margin-top:12px">
+        <input type="hidden" name="pref" value="{{ pref.value }}">
+        {% for a in me.addresses %}
+        <label class="opt"><input type="radio" name="address" value="{{ a.address_id }}" {% if a.address_id == addr_id %}checked{% endif %} onchange="this.form.submit()">
+          <span><b>{{ a.label }}</b> · {{ a.area_type|vi }}<br><span class="muted">{{ a.one_line() }}</span></span></label>
+        {% endfor %}
+      </form>
+    </section>
+
+    {# ---------- 2. Sản phẩm ---------- #}
+    <section class="co-card">
+      <div class="co-head"><h3>🛍️ Sản phẩm</h3><a class="link" href="{{ url_for('cart.view') }}">Sửa giỏ hàng</a></div>
+      <div class="co-items">
+        <div class="co-row co-th"><span>Sản phẩm</span><span>Đơn giá</span><span>Số lượng</span><span>Thành tiền</span></div>
+        {% for i in cart.items %}
+        <div class="co-row">
+          <span class="co-prod"><img src="{{ url_for('static', filename='img/products/' ~ i.product.image_path) }}" alt="">
+            <span>{{ i.product.name }}{% if i.product.temp_class.value != 'AMBIENT' %}<br><span class="tag {{ i.product.temp_class.value }}">{{ 'Đông lạnh' if i.product.temp_class.value == 'FROZEN' else 'Giữ mát' }}</span>{% endif %}</span></span>
+          <span>{{ i.cart_price|vnd }}</span><span>× {{ i.quantity }}</span><b>{{ i.line_total()|vnd }}</b>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="co-foot">Tổng tiền hàng ({{ n_items }} sản phẩm): <b>{{ cart.subtotal()|vnd }}</b></div>
+    </section>
+
+    {# ---------- 3. Vận chuyển (UC06) ---------- #}
+    <section class="co-card">
+      <div class="co-head"><h3>🚚 Phương thức vận chuyển</h3>
+        {% if ai %}<button type="button" class="link" onclick="toggle('mode-list')">Đổi cách giao</button>{% endif %}</div>
+      {% if ai %}
+      {% set ok = decision.options|selectattr('feasible')|list %}
+      {% set alt = ok|reject('sameas', ai)|first %}
+      <div class="ship-pick" id="ship-pick">
+        <div><b id="pick-name">{{ ai.name_vi.split(' (')[0] }}</b> <span class="badge-ai" id="pick-badge">AI đề xuất</span>
+          <div class="muted">Nhận hàng dự kiến <b id="pick-eta">{{ ai.eta_min|arrival }}</b></div>
+          <div class="mode-note" id="pick-note" {% if not (ai.vehicle and ai.vehicle.needs_approval) %}hidden{% endif %}>Chuyến cần điều phối viên xác nhận an toàn trước khi xuất phát</div></div>
+        <b class="ship-fee" id="pick-fee">{{ ai.fee|vnd }}</b>
+      </div>
+      <p class="why"><b>Vì sao AI chọn:</b>
+        {% if ok|length > 1 %}{{ pref|vi|lower }} trong {{ ok|length }} cách giao phù hợp với{% else %}cách giao duy nhất phù hợp với{% endif %}
+        giỏ hàng{% if cart.coldest_class().value != 'AMBIENT' %} ({{ 'có hàng đông lạnh' if cart.coldest_class().value == 'FROZEN' else 'có hàng cần giữ mát' }}){% endif %}
+        và địa chỉ {{ address_label }}, rủi ro trễ / hỏng {{ ('%.1f'|format(ai.risk*100)).replace('.', ',') }}%{% if alt %}. Phương án thay thế: {{ alt.name_vi.split(' (')[0] }} — {{ alt.eta_min }} phút, {{ alt.fee|vnd }}{% endif %}.</p>
+      <div id="mode-list" class="modes" hidden>
+        <form method="get" class="seg" style="margin:4px 0 12px">
+          <input type="hidden" name="address" value="{{ addr_id }}"><span class="muted" style="align-self:center">Ưu tiên:</span>
+          {% for p in prefs %}<label><input type="radio" name="pref" value="{{ p.value }}" {% if pref == p %}checked{% endif %} onchange="this.form.submit()"><span>{{ p|vi }}</span></label>{% endfor %}
+        </form>
+        {% for o in decision.options %}
+        <label class="mode{% if not o.feasible %} off{% endif %}">
+          <input type="radio" name="mode" value="{{ o.mode.value }}" form="orderform" data-fee="{{ o.fee if o.feasible else 0 }}"
+                 data-name="{{ o.name_vi.split(' (')[0] }}" data-eta="{{ o.eta_min|arrival if o.feasible else '' }}"
+                 data-ai="{{ 1 if o is sameas ai else 0 }}" data-approval="{{ 1 if o.vehicle and o.vehicle.needs_approval else 0 }}"
+                 {% if o is sameas ai %}checked{% endif %} {% if not o.feasible %}disabled{% endif %}>
+          <span class="mode-body">
+            <span class="mode-name">{{ o.name_vi.split(' (')[0] }}{% if o is sameas ai %} <span class="badge-ai">AI đề xuất</span>{% endif %}</span>
+            {% if o.feasible %}<span class="mode-kpi">Nhận {{ o.eta_min|arrival }} · rủi ro {{ ('%.1f'|format(o.risk*100)).replace('.', ',') }}%</span>
+            {% else %}<span class="mode-kpi no">{{ WHY.get(o.violations[0].code, o.violations[0].message) }}</span>{% endif %}
+          </span>
+          <b class="mode-fee">{{ o.fee|vnd if o.feasible else '' }}</b>
+        </label>
+        {% endfor %}
+      </div>
+      <p class="muted weather">Thời tiết lúc này: mưa {{ ('%g'|format(w.rain_mmh)).replace('.', ',') }} mm/h · gió {{ ('%g'|format(w.wind_ms)).replace('.', ',') }} m/s{% if w_info.mode == 'AUTO' and not w_info.error %} (dự báo tại nơi giao){% endif %}{% if w.rain_mmh >= 10 or w.wind_ms >= 10 %} — một số phương tiện bay tạm ngưng{% endif %}</p>
+      {% else %}
+      <div class="empty" style="margin:0"><div class="empty-ico">⚠️</div><div><b>Chưa có cách giao phù hợp cho địa chỉ này.</b><div class="muted">Hãy chọn địa chỉ khác hoặc thử lại sau ít phút.</div></div></div>
+      {% endif %}
+    </section>
+
+    {# ---------- 4. Ưu đãi (UC08) ---------- #}
+    <section class="co-card">
+      <div class="co-head"><h3>🎟️ Ưu đãi ChợBay</h3></div>
+      {% if discount %}
+      <div class="voucher"><span class="v-tag">{{ 'VIP' if me.discount_rate() > 0 else 'MỚI' }}</span>
+        <span>{% if me.discount_rate() > 0 %}Ưu đãi thành viên VIP — giảm {{ (me.discount_rate()*100)|round|int }}% tiền hàng{% else %}Voucher chào mừng khách mới — giảm {{ discount|vnd }}{% endif %}
+          <br><span class="muted">Đã tự động áp dụng</span></span><b style="color:var(--leaf)">−{{ discount|vnd }}</b></div>
+      {% else %}<p class="muted" style="margin:0">Chưa có ưu đãi cho đơn này. Thành viên VIP được giảm theo hạng, khách mới có voucher chào mừng.</p>{% endif %}
+    </section>
+
+    {# ---------- 5. Phương thức thanh toán (UC07) ---------- #}
+    <section class="co-card">
+      <div class="co-head"><h3>💳 Phương thức thanh toán</h3></div>
+      <div class="pay-tiles">
+        <label class="pay"><input type="radio" name="method" value="CASH" form="orderform" checked><span><b>Thanh toán khi nhận hàng</b><small>Trả tiền mặt cho phương tiện / shipper</small></span></label>
+        <label class="pay"><input type="radio" name="method" value="CREDIT" form="orderform"><span><b>Thẻ tín dụng / ghi nợ</b><small>Visa, Mastercard, JCB</small></span></label>
+        <label class="pay"><input type="radio" name="method" value="EWALLET" form="orderform"><span><b>Ví điện tử</b><small>{{ wallets|join(' · ') }}</small></span></label>
+      </div>
+      <div id="pay-CREDIT" class="pay-form" hidden>
+        <label class="fld">Số thẻ<input name="card_number" form="orderform" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" maxlength="23"></label>
+        <label class="fld">Tên in trên thẻ<input name="card_name" form="orderform" autocomplete="cc-name" placeholder="NGUYEN VAN A"></label>
+        <div class="fld-row">
+          <label class="fld">Ngày hết hạn<input name="card_exp" form="orderform" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5"></label>
+          <label class="fld">CVV<input name="card_cvv" form="orderform" inputmode="numeric" autocomplete="cc-csc" placeholder="3 số mặt sau" maxlength="4" type="password"></label>
+        </div>
+        <p class="muted secure">🔒 ChợBay chỉ lưu 4 số cuối của thẻ; số thẻ đầy đủ và CVV được chuyển thẳng tới cổng thanh toán.</p>
+      </div>
+      <div id="pay-EWALLET" class="pay-form" hidden>
+        <div class="seg">{% for wl in wallets %}<label><input type="radio" name="wallet" value="{{ wl }}" form="orderform" {% if loop.first %}checked{% endif %}><span>{{ wl }}</span></label>{% endfor %}</div>
+        <p class="muted secure">Sau khi đặt hàng, cổng thanh toán của ví xác nhận giao dịch.</p>
+      </div>
+    </section>
+  </div>
+
+  {# ---------- Tổng thanh toán ---------- #}
+  <aside class="co-side">
+    <form method="post" id="orderform" class="co-card co-sum">
+      <input type="hidden" name="address" value="{{ addr_id }}"><input type="hidden" name="pref" value="{{ pref.value }}">
+      <h3>Chi tiết thanh toán</h3>
+      {% set fee = ai.fee if ai else 0 %}
+      <div class="sum"><span>Tổng tiền hàng</span><span>{{ cart.subtotal()|vnd }}</span></div>
+      <div class="sum"><span>Phí vận chuyển</span><span id="fee">{{ fee|vnd }}</span></div>
+      {% if discount %}<div class="sum" style="color:var(--leaf)"><span>Ưu đãi</span><span>−{{ discount|vnd }}</span></div>{% endif %}
+      <div class="sum total"><span>Tổng thanh toán</span><b id="total" data-base="{{ cart.subtotal() - discount }}">{{ (cart.subtotal() + fee - discount)|vnd }}</b></div>
+      <p class="muted" style="font-size:12.5px;text-align:right;margin:2px 0 14px">Đã bao gồm VAT nếu có</p>
+      <button class="btn chili co-btn" {% if not ai %}disabled{% endif %}>Đặt hàng</button>
+      <p class="muted terms">Nhấn “Đặt hàng” đồng nghĩa bạn đồng ý với điều khoản mua hàng của ChợBay.</p>
+    </form>
+  </aside>
+</div>
+<div class="co-bar"><span>Tổng thanh toán<br><b id="total-m">{{ (cart.subtotal() + (ai.fee if ai else 0) - discount)|vnd }}</b></span>
+  <button class="btn chili" form="orderform" {% if not ai %}disabled{% endif %}>Đặt hàng</button></div>
+<script>
+function toggle(id) { var el = document.getElementById(id); el.hidden = !el.hidden; }
+(function () {
+  var vnd = function (n) { return n.toLocaleString("vi-VN") + "đ"; };
+  var total = document.getElementById("total"), totalM = document.getElementById("total-m"), fee = document.getElementById("fee");
+  document.querySelectorAll("input[name=mode]").forEach(function (r) {
+    r.addEventListener("change", function () {        // đổi cách giao → cập nhật ô đã chọn, phí và tổng tiền
+      var f = +r.dataset.fee, t = vnd(+total.dataset.base + f);
+      fee.textContent = vnd(f); total.textContent = t; totalM.textContent = t;
+      document.getElementById("pick-name").textContent = r.dataset.name;
+      document.getElementById("pick-eta").textContent = r.dataset.eta;
+      document.getElementById("pick-fee").textContent = vnd(f);
+      document.getElementById("pick-badge").hidden = r.dataset.ai !== "1";
+      document.getElementById("pick-note").hidden = r.dataset.approval !== "1";
+    });
+  });
+  document.querySelectorAll("input[name=method]").forEach(function (r) {
+    r.addEventListener("change", function () {
+      ["CREDIT", "EWALLET"].forEach(function (m) { document.getElementById("pay-" + m).hidden = r.value !== m; });
+    });
+  });
+  var num = document.querySelector("input[name=card_number]"), exp = document.querySelector("input[name=card_exp]");
+  num.addEventListener("input", function () { num.value = num.value.replace(/\D/g, "").slice(0, 19).replace(/(\d{4})(?=\d)/g, "$1 "); });
+  exp.addEventListener("input", function () { var d = exp.value.replace(/\D/g, "").slice(0, 4); exp.value = d.length > 2 ? d.slice(0, 2) + "/" + d.slice(2) : d; });
+})();
+</script>
+{% endblock %}

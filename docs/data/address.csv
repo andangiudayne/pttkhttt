@@ -1,0 +1,16 @@
+﻿address_id,customer_id,label,street,ward,district,city,latitude,longitude,area_type,has_drop_zone,nearest_vertiport_km
+1,1,Căn hộ,"Tòa S2, 15 Nguyễn Hữu Thọ",Phước Kiển,Nhà Bè,TP.HCM,10.713,106.705,URBAN_HIGHRISE,1,0.6
+2,2,Nhà phố,42 Lê Thánh Tôn,Bến Nghé,Quận 1,TP.HCM,10.7769,106.7009,URBAN_STREET,0,2.4
+3,3,Nhà trên đảo,Ấp Thạnh Hòa,Xã Thạnh An,Cần Giờ,TP.HCM,10.526,106.975,ISLAND,0,99.0
+4,4,Nhà ven sông,"Bến số 3, An Phú Đông",An Phú Đông,Quận 12,TP.HCM,10.859,106.704,RIVERSIDE,1,6.5
+5,5,Biệt thự,Khu dân cư Chánh Nghĩa,Chánh Nghĩa,Thủ Dầu Một,Bình Dương,10.98,106.65,SUBURBAN,1,0.8
+6,6,Nhà phố,118 Võ Văn Tần,Võ Thị Sáu,Quận 3,TP.HCM,10.7797,106.6869,URBAN_STREET,0,3.1
+7,7,Căn hộ,"Tòa B, Vinhomes Grand Park",Long Thạnh Mỹ,Thủ Đức,TP.HCM,10.842,106.838,URBAN_HIGHRISE,1,1.8
+8,8,Nhà ven sông,25 Bình Quới,Phường 28,Bình Thạnh,TP.HCM,10.815,106.73,RIVERSIDE,1,4.0
+9,9,Căn hộ,"Sunrise City, 23 Nguyễn Hữu Thọ",Tân Hưng,Quận 7,TP.HCM,10.7395,106.701,URBAN_HIGHRISE,1,0.9
+10,10,Nhà phố,64 Phan Văn Trị,Phường 10,Gò Vấp,TP.HCM,10.83,106.679,URBAN_STREET,0,2.2
+11,11,Nhà trên đảo,Ấp Thiềng Liềng,Xã Thạnh An,Cần Giờ,TP.HCM,10.541,106.962,ISLAND,0,99.0
+12,12,Nhà vườn,"Ấp 3, Hiệp Phước",Hiệp Phước,Nhà Bè,TP.HCM,10.656,106.748,SUBURBAN,1,2.5
+13,13,Căn hộ,"The Nassim, 23 Song Hành",An Phú,Thủ Đức,TP.HCM,10.8005,106.744,URBAN_HIGHRISE,1,1.2
+14,14,Nhà phố,Đường Lê Hồng Phong,Phú Hòa,Thủ Dầu Một,Bình Dương,10.972,106.665,SUBURBAN,1,1.0
+15,15,Nhà ven sông,Bến Hiệp Thành,Hiệp Thành,Quận 12,TP.HCM,10.878,106.698,RIVERSIDE,1,5.5

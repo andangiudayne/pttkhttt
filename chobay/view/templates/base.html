@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}ChợBay — Tạp hóa giao bằng drone{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+</head>
+<body>
+<header>
+  <div class="wrap topbar">
+    <a class="logo" href="{{ url_for('home.index') }}">Chợ<span>Bay</span></a>
+    <form class="searchbox" id="searchbox" action="{{ url_for('search.search') }}" method="post" enctype="multipart/form-data">
+      <select name="mode" aria-label="Kiểu tìm kiếm">
+        <option value="TEXT" {% if mode == 'TEXT' %}selected{% endif %}>Gõ chữ</option>
+        <option value="VOICE" {% if mode == 'VOICE' %}selected{% endif %}>Giọng nói</option>
+        <option value="IMAGE" {% if mode == 'IMAGE' %}selected{% endif %}>Hình ảnh</option>
+      </select>
+      <input type="text" name="q" id="q" value="{{ q or '' }}" placeholder="{% if upload %}Đã tìm bằng ảnh {{ upload.name }} — gõ thêm chữ hoặc chọn ảnh khác{% else %}Tìm “mì tôm chua cay”, “sầu riêng”, “sữa dưới 40k”…{% endif %}">
+      <input type="hidden" name="conf" id="voice-conf">
+      <button type="button" id="mic" class="mic" title="Bấm rồi nói (tiếng Việt)" aria-label="Tìm bằng giọng nói">🎤</button>
+      <label class="pick" title="Tìm bằng hình ảnh — chọn hoặc chụp ảnh món hàng">
+        <input type="file" name="image" id="img" accept="image/*" hidden>
+        <img id="img-thumb" alt="Ảnh đã chọn" {% if upload %}src="{{ upload.src }}"{% else %}hidden{% endif %}>
+        <span id="img-ico" {% if upload %}hidden{% endif %}>📷</span>
+      </label>
+      <button>Tìm</button>
+    </form>
+    <nav class="navlinks">
+      {% if staff %}
+      <a href="{{ url_for('dispatch.board') }}" class="nav-strong">Bảng điều phối</a>
+      <span class="who">{{ staff.full_name }}<small>Điều phối viên</small></span>
+      <form method="post" action="{{ url_for('account.logout') }}"><button class="linkbtn">Đăng xuất</button></form>
+      {% elif me %}
+      <span class="who">{{ me.name.display() }}<small>{{ me.addresses[0].label if me.addresses else '' }}</small></span>
+      <a href="{{ url_for('order.my_orders') }}">Đơn mua</a>
+      <a href="{{ url_for('cart.view') }}">Giỏ <span class="pill" id="cart-pill">{{ cart_count }}</span></a>
+      <form method="post" action="{{ url_for('account.logout') }}"><button class="linkbtn">Đăng xuất</button></form>
+      {% else %}
+      <a href="{{ url_for('account.login') }}" class="nav-strong">Đăng nhập</a>
+      {% endif %}
+    </nav>
+  </div>
+  <div class="cats"><div class="wrap">
+    <a href="{{ url_for('home.index') }}" class="{% if not active_cat %}on{% endif %}">Tất cả</a>
+    {% for c in categories %}<a href="{{ url_for('home.index', cat=c.category_id) }}" class="{% if active_cat == c.category_id %}on{% endif %}">{{ c.name }}</a>{% endfor %}
+  </div></div>
+</header>
+<main class="wrap">
+  {% with msgs = get_flashed_messages() %}{% for m in msgs %}<div class="flash">{{ m }}</div>{% endfor %}{% endwith %}
+  {% block content %}{% endblock %}
+</main>
+<script>
+/* SearchUI — Speech-to-Text bằng Web Speech API (Chrome/Edge). Bấm 🎤 → nói → tự gửi với mode=VOICE.
+   Trình duyệt không hỗ trợ → khách gõ câu nói và chọn "Giọng nói" (fallback). */
+(function () {
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  var mic = document.getElementById("mic"), q = document.getElementById("q"),
+      form = document.getElementById("searchbox"), conf = document.getElementById("voice-conf"),
+      mode = form.querySelector("select[name=mode]"), hint = q.placeholder;
+  if (!SR) { mic.title = "Trình duyệt này chưa hỗ trợ nhận dạng giọng nói — hãy dùng Chrome/Edge, hoặc gõ câu nói và chọn “Giọng nói”."; mic.classList.add("off"); }
+  mic.addEventListener("click", function () {
+    if (!SR) { q.value = ""; q.placeholder = "Chưa hỗ trợ micro — gõ câu nói rồi chọn “Giọng nói”"; mode.value = "VOICE"; q.focus(); return; }
+    var rec = new SR();
+    rec.lang = "vi-VN"; rec.interimResults = true; rec.maxAlternatives = 1;
+    mic.classList.add("on"); q.value = ""; q.placeholder = "Đang nghe… hãy nói tên món hoặc “đơn hàng gần nhất”";
+    rec.onresult = function (e) {
+      var r = e.results[e.results.length - 1];
+      q.value = r[0].transcript;
+      if (r.isFinal) { conf.value = r[0].confidence || ""; mode.value = "VOICE"; review(); }
+    };
+    rec.onerror = function (e) {
+      q.placeholder = e.error === "not-allowed" ? "Chưa cấp quyền micro — bấm biểu tượng 🔒 trên thanh địa chỉ để cho phép"
+                    : e.error === "no-speech" ? "Không nghe thấy gì — bấm 🎤 và nói lại" : "Lỗi micro (" + e.error + ") — hãy gõ câu nói";
+    };
+    rec.onend = function () { mic.classList.remove("on"); if (!q.value) setTimeout(function () { q.placeholder = hint; }, 4000); };
+    rec.start();
+  });
+  /* Biểu đồ hoạt động 3.4: "Xem văn bản, sửa nếu sai rồi gửi" — tự gửi sau 3 giây, bấm vào ô để sửa thì dừng đếm. */
+  var btn = form.querySelector("button:not(.mic)"), timer = null;
+  function stop() { if (timer) { clearInterval(timer); timer = null; btn.textContent = "Tìm"; } }
+  function review() {
+    var left = 3; btn.textContent = "Tìm (" + left + ")";
+    timer = setInterval(function () { left -= 1; if (left <= 0) { stop(); form.submit(); } else btn.textContent = "Tìm (" + left + ")"; }, 1000);
+  }
+  q.addEventListener("focus", stop); q.addEventListener("input", stop);
+})();
+</script>
+<script>
+/* SearchUI — tìm bằng ảnh: bấm 📷 (hoặc chọn "Hình ảnh") → chọn/chụp ảnh → ảnh hiện ngay trong ô tìm kiếm. */
+(function () {
+  var inp = document.getElementById("img"), th = document.getElementById("img-thumb"), ico = document.getElementById("img-ico"),
+      form = document.getElementById("searchbox"), q = document.getElementById("q"), mode = form.querySelector("select[name=mode]");
+  inp.addEventListener("change", function () {
+    var f = inp.files[0]; if (!f) return;
+    th.src = URL.createObjectURL(f); th.hidden = false; ico.hidden = true; mode.value = "IMAGE";
+    q.placeholder = "Đã chọn ảnh “" + f.name + "” — bấm Tìm (có thể gõ thêm chữ, ví dụ “trái cây”)";
+  });
+  mode.addEventListener("change", function () { if (mode.value === "IMAGE" && !inp.files.length) inp.click(); });
+  form.addEventListener("submit", function (e) {
+    if (mode.value === "IMAGE" && !inp.files.length && !q.value.trim()) { e.preventDefault(); inp.click(); }
+  });
+})();
+</script>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script>
+/* Thêm vào giỏ không tải lại trang: ở lại kết quả tìm kiếm / danh sách, cập nhật số trên “Giỏ” và báo bằng thông báo nổi.
+   Không có JavaScript → form vẫn gửi bình thường và quay lại trang trước. */
+(function () {
+  var toast = document.getElementById("toast"), pill = document.getElementById("cart-pill"), t = null;
+  function say(msg, ok) {
+    toast.textContent = msg; toast.className = "toast" + (ok ? "" : " bad"); toast.hidden = false;
+    clearTimeout(t); t = setTimeout(function () { toast.hidden = true; }, 2600);
+  }
+  document.addEventListener("submit", function (e) {
+    var f = e.target;
+    if (!f.action || f.action.indexOf("/cart/add/") < 0 || !window.fetch) return;
+    e.preventDefault();
+    var btn = f.querySelector("button"); if (btn) btn.disabled = true;
+    fetch(f.action, {method: "POST", body: new FormData(f), headers: {"X-Requested-With": "fetch"}, credentials: "same-origin"})
+      .then(function (r) { if (r.redirected) { window.location = r.url; return null; } return r.json(); })
+      .then(function (d) { if (!d) return; if (pill) pill.textContent = d.count; say(d.message, d.ok); })
+      .catch(function () { f.submit(); })
+      .then(function () { if (btn) btn.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>

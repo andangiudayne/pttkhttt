@@ -1,0 +1,1319 @@
+{
+ "search": [
+  {
+   "mode": "TEXT",
+   "query": "nuoc dua",
+   "tokens": [
+    "nuoc",
+    "dua"
+   ],
+   "expect": 10,
+   "hit": true,
+   "top": [
+    {
+     "pid": 10,
+     "name": "Nước dừa Vietcoco hộp 330ml",
+     "score": 0.993,
+     "s_text": 1.0,
+     "s_image": 0.0,
+     "s_business": 0.96
+    }
+   ]
+  },
+  {
+   "mode": "TEXT",
+   "query": "sữa tươi dưới 40k",
+   "tokens": [
+    "sua",
+    "tuoi"
+   ],
+   "expect": 6,
+   "hit": true,
+   "top": [
+    {
+     "pid": 6,
+     "name": "Sữa tươi tiệt trùng Vinamilk 100% hộp 1L",
+     "score": 0.998,
+     "s_text": 1.0,
+     "s_image": 0.0,
+     "s_business": 0.99
+    },
+    {
+     "pid": 13,
+     "name": "Bánh mì tươi Kinh Đô bơ sữa 55g",
+     "score": 0.792,
+     "s_text": 0.75,
+     "s_image": 0.0,
+     "s_business": 0.96
+    }
+   ]
+  },
+  {
+   "mode": "TEXT",
+   "query": "mi tom chua cay",
+   "tokens": [
+    "mi",
+    "goi",
+    "chua",
+    "cay"
+   ],
+   "expect": 1,
+   "hit": true,
+   "top": [
+    {
+     "pid": 1,
+     "name": "Mì Kim Chi Acecook gói 75g",
+     "score": 0.712,
+     "s_text": 0.65,
+     "s_image": 0.0,
+     "s_business": 0.98
+    },
+    {
+     "pid": 3,
+     "name": "Bún bò Huế ăn liền Vifon 65g",
+     "score": 0.583,
+     "s_text": 0.49,
+     "s_image": 0.0,
+     "s_business": 0.96
+    },
+    {
+     "pid": 2,
+     "name": "Mì không chiên Mikochi vị sườn heo",
+     "score": 0.561,
+     "s_text": 0.46,
+     "s_image": 0.0,
+     "s_business": 0.97
+    }
+   ]
+  },
+  {
+   "mode": "VOICE",
+   "query": "tìm giúp mình kem sầu riêng nha",
+   "tokens": [
+    "kem",
+    "sau",
+    "rieng"
+   ],
+   "expect": 14,
+   "hit": true,
+   "top": [
+    {
+     "pid": 14,
+     "name": "Kem que sầu riêng hộp 4 que",
+     "score": 0.894,
+     "s_text": 0.88,
+     "s_image": 0.0,
+     "s_business": 0.97
+    },
+    {
+     "pid": 17,
+     "name": "Sầu riêng Ri6 nguyên trái (~2,6kg)",
+     "score": 0.698,
+     "s_text": 0.62,
+     "s_image": 0.0,
+     "s_business": 0.99
+    }
+   ]
+  },
+  {
+   "mode": "VOICE",
+   "query": "mua cho tôi ít tôm tươi",
+   "tokens": [
+    "tom",
+    "tuoi"
+   ],
+   "expect": 20,
+   "hit": true,
+   "top": [
+    {
+     "pid": 20,
+     "name": "Tôm sú tươi 500g",
+     "score": 0.996,
+     "s_text": 1.0,
+     "s_image": 0.0,
+     "s_business": 0.98
+    }
+   ]
+  },
+  {
+   "mode": "IMAGE",
+   "query": "thanh_long_khach_chup.jpg",
+   "tokens": [],
+   "expect": 16,
+   "hit": true,
+   "top": [
+    {
+     "pid": 16,
+     "name": "Thanh long ruột trắng 1kg",
+     "score": 0.412,
+     "s_text": 0.0,
+     "s_image": 0.31,
+     "s_business": 0.98
+    }
+   ]
+  },
+  {
+   "mode": "IMAGE",
+   "query": "sau_rieng_khach_chup.jpg",
+   "tokens": [],
+   "expect": 17,
+   "hit": true,
+   "top": [
+    {
+     "pid": 17,
+     "name": "Sầu riêng Ri6 nguyên trái (~2,6kg)",
+     "score": 0.391,
+     "s_text": 0.0,
+     "s_image": 0.29,
+     "s_business": 0.99
+    }
+   ]
+  },
+  {
+   "mode": "IMAGE",
+   "query": "rau_muong_khach_chup.jpg",
+   "tokens": [],
+   "expect": 18,
+   "hit": true,
+   "top": [
+    {
+     "pid": 18,
+     "name": "Rau muống 500g",
+     "score": 0.416,
+     "s_text": 0.0,
+     "s_image": 0.32,
+     "s_business": 0.96
+    },
+    {
+     "pid": 20,
+     "name": "Tôm sú tươi 500g",
+     "score": 0.381,
+     "s_text": 0.0,
+     "s_image": 0.27,
+     "s_business": 0.98
+    }
+   ]
+  },
+  {
+   "mode": "MULTI",
+   "query": "trái cây",
+   "tokens": [
+    "trai",
+    "cay"
+   ],
+   "expect": 16,
+   "hit": true,
+   "top": [
+    {
+     "pid": 16,
+     "name": "Thanh long ruột trắng 1kg",
+     "score": 0.722,
+     "s_text": 1.0,
+     "s_image": 0.31,
+     "s_business": 0.98
+    },
+    {
+     "pid": 17,
+     "name": "Sầu riêng Ri6 nguyên trái (~2,6kg)",
+     "score": 0.69,
+     "s_text": 1.0,
+     "s_image": 0.23,
+     "s_business": 0.99
+    },
+    {
+     "pid": 22,
+     "name": "Xoài cát Hòa Lộc 1kg",
+     "score": 0.687,
+     "s_text": 1.0,
+     "s_image": 0.22,
+     "s_business": 0.98
+    }
+   ]
+  },
+  {
+   "mode": "TEXT",
+   "query": "ca phe sua",
+   "tokens": [
+    "ca",
+    "phe",
+    "sua"
+   ],
+   "expect": 11,
+   "hit": true,
+   "top": [
+    {
+     "pid": 11,
+     "name": "Cà phê G7 3in1 bịch 22 gói",
+     "score": 0.995,
+     "s_text": 1.0,
+     "s_image": 0.0,
+     "s_business": 0.98
+    }
+   ]
+  },
+  {
+   "mode": "IMAGE",
+   "query": "trung_ga_khach_chup.jpg",
+   "tokens": [],
+   "expect": 19,
+   "hit": false,
+   "top": [
+    {
+     "pid": 22,
+     "name": "Xoài cát Hòa Lộc 1kg",
+     "score": 0.432,
+     "s_text": 0.0,
+     "s_image": 0.33,
+     "s_business": 0.98
+    },
+    {
+     "pid": 19,
+     "name": "Trứng gà vỉ 10 quả",
+     "score": 0.403,
+     "s_text": 0.0,
+     "s_image": 0.3,
+     "s_business": 0.98
+    }
+   ]
+  },
+  {
+   "mode": "IMAGE",
+   "query": "tom_khach_chup.jpg",
+   "tokens": [],
+   "expect": 20,
+   "hit": true,
+   "top": [
+    {
+     "pid": 20,
+     "name": "Tôm sú tươi 500g",
+     "score": 0.585,
+     "s_text": 0.0,
+     "s_image": 0.51,
+     "s_business": 0.98
+    }
+   ]
+  },
+  {
+   "mode": "IMAGE",
+   "query": "ca_basa_khach_chup.jpg",
+   "tokens": [],
+   "expect": 15,
+   "hit": false,
+   "top": [
+    {
+     "pid": 19,
+     "name": "Trứng gà vỉ 10 quả",
+     "score": 0.422,
+     "s_text": 0.0,
+     "s_image": 0.32,
+     "s_business": 0.98
+    }
+   ]
+  },
+  {
+   "mode": "TEXT",
+   "query": "mì tôm chua cay",
+   "tokens": [
+    "mi",
+    "goi",
+    "chua",
+    "cay"
+   ],
+   "expect": 1,
+   "hit": true,
+   "top": [
+    {
+     "pid": 1,
+     "name": "Mì Kim Chi Acecook gói 75g",
+     "score": 0.712,
+     "s_text": 0.65,
+     "s_image": 0.0,
+     "s_business": 0.98
+    },
+    {
+     "pid": 3,
+     "name": "Bún bò Huế ăn liền Vifon 65g",
+     "score": 0.583,
+     "s_text": 0.49,
+     "s_image": 0.0,
+     "s_business": 0.96
+    },
+    {
+     "pid": 2,
+     "name": "Mì không chiên Mikochi vị sườn heo",
+     "score": 0.561,
+     "s_text": 0.46,
+     "s_image": 0.0,
+     "s_business": 0.97
+    }
+   ]
+  },
+  {
+   "mode": "TEXT",
+   "query": "sua chau dau",
+   "tokens": [
+    "sua",
+    "chau",
+    "dau"
+   ],
+   "expect": 8,
+   "hit": true,
+   "top": [
+    {
+     "pid": 8,
+     "name": "Sữa chua dâu Vinamilk lốc 4 hộp",
+     "score": 0.595,
+     "s_text": 0.5,
+     "s_image": 0.0,
+     "s_business": 0.98
+    }
+   ]
+  },
+  {
+   "mode": "VOICE",
+   "query": "cho em một vỉ trứng gà",
+   "tokens": [
+    "vi",
+    "trung",
+    "ga"
+   ],
+   "expect": 19,
+   "hit": true,
+   "top": [
+    {
+     "pid": 19,
+     "name": "Trứng gà vỉ 10 quả",
+     "score": 0.895,
+     "s_text": 0.88,
+     "s_image": 0.0,
+     "s_business": 0.98
+    }
+   ]
+  },
+  {
+   "mode": "TEXT",
+   "query": "đơn hàng số 121",
+   "intent": "ORDER",
+   "expect": 121,
+   "hit": true,
+   "top": [
+    {
+     "order_id": 121,
+     "status": "PACKING",
+     "total": 45700
+    }
+   ]
+  },
+  {
+   "mode": "VOICE",
+   "query": "đơn hàng gần nhất của mình đâu rồi",
+   "intent": "ORDER",
+   "expect": 121,
+   "hit": true,
+   "top": [
+    {
+     "order_id": 121,
+     "status": "PACKING",
+     "total": 45700
+    }
+   ]
+  }
+ ],
+ "dispatch": [
+  {
+   "title": "S1 Chung cư Nhà Bè — sữa chua + bánh mì (nhẹ, mát)",
+   "pref": "FAST",
+   "weight": 0.53,
+   "coldest": "CHILLED",
+   "rain": 0,
+   "wind": 4,
+   "chosen": "DRONE",
+   "confidence": 0.64,
+   "needs_human": false,
+   "reason": "Chọn DRONE (Drone giao hàng) — ETA 22′, phí 21.000đ, rủi ro 2%, ưu tiên FAST; phương án 2 là EBIKE (điểm 0.2025). Loại: ROBOT: BR-D02, SUBMARINE: BR-D03, AUTO_BOAT: BR-D03.",
+   "options": [
+    {
+     "mode": "DRONE",
+     "name": "Drone giao hàng",
+     "feasible": true,
+     "eta": 22,
+     "fee": 21000,
+     "risk": 0.021,
+     "co2": 23,
+     "score": 0.1387,
+     "dist": 2.98,
+     "viol": []
+    },
+    {
+     "mode": "EBIKE",
+     "name": "Shipper xe máy điện",
+     "feasible": true,
+     "eta": 36,
+     "fee": 31000,
+     "risk": 0.012,
+     "co2": 60,
+     "score": 0.2025,
+     "dist": 4.03,
+     "viol": []
+    },
+    {
+     "mode": "AUTO_CAR",
+     "name": "Xe tự lái (van điện không người lái)",
+     "feasible": true,
+     "eta": 45,
+     "fee": 32000,
+     "risk": 0.013,
+     "co2": 161,
+     "score": 0.2488,
+     "dist": 4.03,
+     "viol": []
+    },
+    {
+     "mode": "LOCKER",
+     "name": "Tủ khóa thông minh (tự nhận)",
+     "feasible": true,
+     "eta": 45,
+     "fee": 0,
+     "risk": 0.018,
+     "co2": 0,
+     "score": 0.3741,
+     "dist": 0.5,
+     "viol": []
+    },
+    {
+     "mode": "FLYING_CAR",
+     "name": "Ô tô bay chở hàng (eVTOL)",
+     "feasible": true,
+     "eta": 60,
+     "fee": 207000,
+     "risk": 0.015,
+     "co2": 651,
+     "score": 0.4669,
+     "dist": 10.85,
+     "viol": []
+    },
+    {
+     "mode": "ROBOT",
+     "name": "Robot giao hàng vỉa hè",
+     "feasible": false,
+     "eta": 49,
+     "fee": 14000,
+     "risk": 0.574,
+     "co2": 12,
+     "score": null,
+     "dist": 4.03,
+     "viol": [
+      "BR-D02 Quãng đường 4.03 km > tầm 3 km"
+     ]
+    },
+    {
+     "mode": "SUBMARINE",
+     "name": "Tàu ngầm tự hành chở hàng (AUV)",
+     "feasible": false,
+     "eta": 311,
+     "fee": 366000,
+     "risk": 0.018,
+     "co2": 1082,
+     "score": null,
+     "dist": 54.12,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực URBAN_HIGHRISE"
+     ]
+    },
+    {
+     "mode": "AUTO_BOAT",
+     "name": "Xuồng tự hành trên sông",
+     "feasible": false,
+     "eta": 86,
+     "fee": 66000,
+     "risk": 0.02,
+     "co2": 171,
+     "score": null,
+     "dist": 14.29,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực URBAN_HIGHRISE"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "S2 Chung cư Nhà Bè — 2 thùng sữa 48 hộp (19,2 kg)",
+   "pref": "CHEAP",
+   "weight": 19.2,
+   "coldest": "AMBIENT",
+   "rain": 0,
+   "wind": 4,
+   "chosen": "EBIKE",
+   "confidence": 0.57,
+   "needs_human": true,
+   "reason": "Chọn EBIKE (Shipper xe máy điện) — ETA 36′, phí 31.000đ, rủi ro 1%, ưu tiên CHEAP; phương án 2 là AUTO_CAR (điểm 0.1628). Loại: DRONE: BR-D01, ROBOT: BR-D01, SUBMARINE: BR-D03, AUTO_BOAT: BR-D03.",
+   "options": [
+    {
+     "mode": "EBIKE",
+     "name": "Shipper xe máy điện",
+     "feasible": true,
+     "eta": 36,
+     "fee": 31000,
+     "risk": 0.012,
+     "co2": 60,
+     "score": 0.1445,
+     "dist": 4.03,
+     "viol": []
+    },
+    {
+     "mode": "AUTO_CAR",
+     "name": "Xe tự lái (van điện không người lái)",
+     "feasible": true,
+     "eta": 45,
+     "fee": 32000,
+     "risk": 0.013,
+     "co2": 161,
+     "score": 0.1628,
+     "dist": 4.03,
+     "viol": []
+    },
+    {
+     "mode": "LOCKER",
+     "name": "Tủ khóa thông minh (tự nhận)",
+     "feasible": true,
+     "eta": 45,
+     "fee": 0,
+     "risk": 0.018,
+     "co2": 0,
+     "score": 0.2241,
+     "dist": 0.5,
+     "viol": []
+    },
+    {
+     "mode": "FLYING_CAR",
+     "name": "Ô tô bay chở hàng (eVTOL)",
+     "feasible": true,
+     "eta": 60,
+     "fee": 207000,
+     "risk": 0.015,
+     "co2": 651,
+     "score": 0.6809,
+     "dist": 10.85,
+     "viol": []
+    },
+    {
+     "mode": "DRONE",
+     "name": "Drone giao hàng",
+     "feasible": false,
+     "eta": 22,
+     "fee": 21000,
+     "risk": 0.021,
+     "co2": 23,
+     "score": null,
+     "dist": 2.98,
+     "viol": [
+      "BR-D01 Đơn nặng 19.2 kg > tải tối đa 2.5 kg"
+     ]
+    },
+    {
+     "mode": "ROBOT",
+     "name": "Robot giao hàng vỉa hè",
+     "feasible": false,
+     "eta": 49,
+     "fee": 14000,
+     "risk": 0.574,
+     "co2": 12,
+     "score": null,
+     "dist": 4.03,
+     "viol": [
+      "BR-D01 Đơn nặng 19.2 kg > tải tối đa 15 kg",
+      "BR-D02 Quãng đường 4.03 km > tầm 3 km"
+     ]
+    },
+    {
+     "mode": "SUBMARINE",
+     "name": "Tàu ngầm tự hành chở hàng (AUV)",
+     "feasible": false,
+     "eta": 311,
+     "fee": 366000,
+     "risk": 0.018,
+     "co2": 1082,
+     "score": null,
+     "dist": 54.12,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực URBAN_HIGHRISE"
+     ]
+    },
+    {
+     "mode": "AUTO_BOAT",
+     "name": "Xuồng tự hành trên sông",
+     "feasible": false,
+     "eta": 86,
+     "fee": 66000,
+     "risk": 0.02,
+     "co2": 171,
+     "score": null,
+     "dist": 14.29,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực URBAN_HIGHRISE"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "S3 Xã đảo Thạnh An — tôm + kem sầu riêng + gạo",
+   "pref": "FAST",
+   "weight": 3.4,
+   "coldest": "FROZEN",
+   "rain": 15,
+   "wind": 14,
+   "chosen": "SUBMARINE",
+   "confidence": 0.99,
+   "needs_human": true,
+   "reason": "Chọn SUBMARINE (Tàu ngầm tự hành chở hàng (AUV)) — ETA 167′, phí 215.000đ, rủi ro 2%, ưu tiên FAST. Loại: DRONE: BR-D01, ROBOT: BR-D02, AUTO_CAR: BR-D03, FLYING_CAR: BR-D02, AUTO_BOAT: BR-D02, EBIKE: BR-D02, LOCKER: BR-D03.",
+   "options": [
+    {
+     "mode": "SUBMARINE",
+     "name": "Tàu ngầm tự hành chở hàng (AUV)",
+     "feasible": true,
+     "eta": 167,
+     "fee": 215000,
+     "risk": 0.016,
+     "co2": 324,
+     "score": 1.0424,
+     "dist": 16.22,
+     "viol": []
+    },
+    {
+     "mode": "DRONE",
+     "name": "Drone giao hàng",
+     "feasible": false,
+     "eta": 123,
+     "fee": 87000,
+     "risk": 1.0,
+     "co2": 288,
+     "score": null,
+     "dist": 36.05,
+     "viol": [
+      "BR-D01 Đơn nặng 3.4 kg > tải tối đa 2.5 kg",
+      "BR-D02 Quãng đường 36.05 km > tầm 12 km",
+      "BR-D03 Không phục vụ khu vực ISLAND",
+      "BR-D04 Có hàng đông lạnh: cần khoang cấp đông hoặc giao ≤ 30 phút",
+      "BR-D06 Thời tiết vượt ngưỡng (gió 14 m/s, mưa 15 mm/h)",
+      "BR-D07 Địa chỉ không có điểm thả drone",
+      "BR-D11 Xã đảo chỉ tiếp cận bằng đường biển"
+     ]
+    },
+    {
+     "mode": "ROBOT",
+     "name": "Robot giao hàng vỉa hè",
+     "feasible": false,
+     "eta": 193,
+     "fee": 81000,
+     "risk": 1.0,
+     "co2": 145,
+     "score": null,
+     "dist": 48.66,
+     "viol": [
+      "BR-D02 Quãng đường 48.66 km > tầm 3 km",
+      "BR-D03 Không phục vụ khu vực ISLAND",
+      "BR-D04 Có hàng đông lạnh: cần khoang cấp đông hoặc giao ≤ 30 phút",
+      "BR-D06 Thời tiết vượt ngưỡng (gió 14 m/s, mưa 15 mm/h)",
+      "BR-D11 Xã đảo chỉ tiếp cận bằng đường biển"
+     ]
+    },
+    {
+     "mode": "AUTO_CAR",
+     "name": "Xe tự lái (van điện không người lái)",
+     "feasible": false,
+     "eta": 187,
+     "fee": 166000,
+     "risk": 0.088,
+     "co2": 1946,
+     "score": null,
+     "dist": 48.66,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực ISLAND",
+      "BR-D11 Xã đảo chỉ tiếp cận bằng đường biển"
+     ]
+    },
+    {
+     "mode": "FLYING_CAR",
+     "name": "Ô tô bay chở hàng (eVTOL)",
+     "feasible": false,
+     "eta": 145,
+     "fee": 488000,
+     "risk": 1.0,
+     "co2": 2758,
+     "score": null,
+     "dist": 45.97,
+     "viol": [
+      "BR-D02 Quãng đường 45.97 km > tầm 40 km",
+      "BR-D03 Không phục vụ khu vực ISLAND",
+      "BR-D06 Thời tiết vượt ngưỡng (gió 14 m/s, mưa 15 mm/h)",
+      "BR-D08 Bãi đáp gần nhất cách 99.0 km (> 1 km)",
+      "BR-D09 Hàng mùi mạnh (sầu riêng) không đi khoang ô tô bay dùng chung",
+      "BR-D11 Xã đảo chỉ tiếp cận bằng đường biển"
+     ]
+    },
+    {
+     "mode": "AUTO_BOAT",
+     "name": "Xuồng tự hành trên sông",
+     "feasible": false,
+     "eta": 208,
+     "fee": 163000,
+     "risk": 0.98,
+     "co2": 640,
+     "score": null,
+     "dist": 53.35,
+     "viol": [
+      "BR-D02 Quãng đường 53.35 km > tầm 40 km",
+      "BR-D03 Không phục vụ khu vực ISLAND",
+      "BR-D04 Có hàng đông lạnh: cần khoang cấp đông hoặc giao ≤ 30 phút"
+     ]
+    },
+    {
+     "mode": "EBIKE",
+     "name": "Shipper xe máy điện",
+     "feasible": false,
+     "eta": 185,
+     "fee": 210000,
+     "risk": 1.0,
+     "co2": 729,
+     "score": null,
+     "dist": 48.66,
+     "viol": [
+      "BR-D02 Quãng đường 48.66 km > tầm 20 km",
+      "BR-D03 Không phục vụ khu vực ISLAND",
+      "BR-D04 Có hàng đông lạnh: cần khoang cấp đông hoặc giao ≤ 30 phút",
+      "BR-D11 Xã đảo chỉ tiếp cận bằng đường biển"
+     ]
+    },
+    {
+     "mode": "LOCKER",
+     "name": "Tủ khóa thông minh (tự nhận)",
+     "feasible": false,
+     "eta": 47,
+     "fee": 0,
+     "risk": 0.019,
+     "co2": 0,
+     "score": null,
+     "dist": 0.5,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực ISLAND",
+      "BR-D11 Xã đảo chỉ tiếp cận bằng đường biển"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "S4 Ven sông Q12 — sầu riêng + xoài",
+   "pref": "GREEN",
+   "weight": 4.6,
+   "coldest": "AMBIENT",
+   "rain": 0,
+   "wind": 5,
+   "chosen": "AUTO_BOAT",
+   "confidence": 0.63,
+   "needs_human": false,
+   "reason": "Chọn AUTO_BOAT (Xuồng tự hành trên sông) — ETA 58′, phí 46.000đ, rủi ro 2%, ưu tiên GREEN; phương án 2 là EBIKE (điểm 0.2092). Loại: DRONE: BR-D01, ROBOT: BR-D02, FLYING_CAR: BR-D03, SUBMARINE: BR-D03, LOCKER: BR-D03.",
+   "options": [
+    {
+     "mode": "AUTO_BOAT",
+     "name": "Xuồng tự hành trên sông",
+     "feasible": true,
+     "eta": 58,
+     "fee": 46000,
+     "risk": 0.02,
+     "co2": 76,
+     "score": 0.15,
+     "dist": 6.41,
+     "viol": []
+    },
+    {
+     "mode": "EBIKE",
+     "name": "Shipper xe máy điện",
+     "feasible": true,
+     "eta": 85,
+     "fee": 55000,
+     "risk": 0.016,
+     "co2": 151,
+     "score": 0.2092,
+     "dist": 10.12,
+     "viol": []
+    },
+    {
+     "mode": "AUTO_CAR",
+     "name": "Xe tự lái (van điện không người lái)",
+     "feasible": true,
+     "eta": 87,
+     "fee": 50000,
+     "risk": 0.011,
+     "co2": 404,
+     "score": 0.2786,
+     "dist": 10.12,
+     "viol": []
+    },
+    {
+     "mode": "DRONE",
+     "name": "Drone giao hàng",
+     "feasible": false,
+     "eta": 51,
+     "fee": 30000,
+     "risk": 0.044,
+     "co2": 59,
+     "score": null,
+     "dist": 7.49,
+     "viol": [
+      "BR-D01 Đơn nặng 4.6 kg > tải tối đa 2.5 kg"
+     ]
+    },
+    {
+     "mode": "ROBOT",
+     "name": "Robot giao hàng vỉa hè",
+     "feasible": false,
+     "eta": 84,
+     "fee": 23000,
+     "risk": 1.0,
+     "co2": 30,
+     "score": null,
+     "dist": 10.12,
+     "viol": [
+      "BR-D02 Quãng đường 10.12 km > tầm 3 km",
+      "BR-D03 Không phục vụ khu vực RIVERSIDE"
+     ]
+    },
+    {
+     "mode": "FLYING_CAR",
+     "name": "Ô tô bay chở hàng (eVTOL)",
+     "feasible": false,
+     "eta": 58,
+     "fee": 185000,
+     "risk": 0.017,
+     "co2": 487,
+     "score": null,
+     "dist": 8.13,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực RIVERSIDE",
+      "BR-D08 Bãi đáp gần nhất cách 6.5 km (> 1 km)",
+      "BR-D09 Hàng mùi mạnh (sầu riêng) không đi khoang ô tô bay dùng chung"
+     ]
+    },
+    {
+     "mode": "SUBMARINE",
+     "name": "Tàu ngầm tự hành chở hàng (AUV)",
+     "feasible": false,
+     "eta": 381,
+     "fee": 434000,
+     "risk": 0.022,
+     "co2": 1421,
+     "score": null,
+     "dist": 71.09,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực RIVERSIDE"
+     ]
+    },
+    {
+     "mode": "LOCKER",
+     "name": "Tủ khóa thông minh (tự nhận)",
+     "feasible": false,
+     "eta": 45,
+     "fee": 0,
+     "risk": 0.018,
+     "co2": 0,
+     "score": null,
+     "dist": 0.5,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực RIVERSIDE"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "S5 Thủ Dầu Một — cá basa đông lạnh 3 kg",
+   "pref": "FAST",
+   "weight": 3.0,
+   "coldest": "FROZEN",
+   "rain": 0,
+   "wind": 6,
+   "chosen": "FLYING_CAR",
+   "confidence": 0.99,
+   "needs_human": true,
+   "reason": "Chọn FLYING_CAR (Ô tô bay chở hàng (eVTOL)) — ETA 65′, phí 280.000đ, rủi ro 3%, ưu tiên FAST; phương án 2 là AUTO_CAR (điểm 0.9407). Loại: DRONE: BR-D01, ROBOT: BR-D02, SUBMARINE: BR-D03, AUTO_BOAT: BR-D03, EBIKE: BR-D02, LOCKER: BR-D03.",
+   "options": [
+    {
+     "mode": "FLYING_CAR",
+     "name": "Ô tô bay chở hàng (eVTOL)",
+     "feasible": true,
+     "eta": 65,
+     "fee": 280000,
+     "risk": 0.026,
+     "co2": 1202,
+     "score": 0.5782,
+     "dist": 20.04,
+     "viol": []
+    },
+    {
+     "mode": "AUTO_CAR",
+     "name": "Xe tự lái (van điện không người lái)",
+     "feasible": true,
+     "eta": 160,
+     "fee": 100000,
+     "risk": 0.014,
+     "co2": 1061,
+     "score": 0.9407,
+     "dist": 26.54,
+     "viol": []
+    },
+    {
+     "mode": "DRONE",
+     "name": "Drone giao hàng",
+     "feasible": false,
+     "eta": 102,
+     "fee": 54000,
+     "risk": 0.995,
+     "co2": 157,
+     "score": null,
+     "dist": 19.66,
+     "viol": [
+      "BR-D01 Đơn nặng 3.0 kg > tải tối đa 2.5 kg",
+      "BR-D02 Quãng đường 19.66 km > tầm 12 km",
+      "BR-D04 Có hàng đông lạnh: cần khoang cấp đông hoặc giao ≤ 30 phút"
+     ]
+    },
+    {
+     "mode": "ROBOT",
+     "name": "Robot giao hàng vỉa hè",
+     "feasible": false,
+     "eta": 140,
+     "fee": 48000,
+     "risk": 1.0,
+     "co2": 79,
+     "score": null,
+     "dist": 26.54,
+     "viol": [
+      "BR-D02 Quãng đường 26.54 km > tầm 3 km",
+      "BR-D03 Không phục vụ khu vực SUBURBAN",
+      "BR-D04 Có hàng đông lạnh: cần khoang cấp đông hoặc giao ≤ 30 phút"
+     ]
+    },
+    {
+     "mode": "SUBMARINE",
+     "name": "Tàu ngầm tự hành chở hàng (AUV)",
+     "feasible": false,
+     "eta": 459,
+     "fee": 508000,
+     "risk": 0.033,
+     "co2": 1787,
+     "score": null,
+     "dist": 89.39,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực SUBURBAN"
+     ]
+    },
+    {
+     "mode": "AUTO_BOAT",
+     "name": "Xuồng tự hành trên sông",
+     "feasible": false,
+     "eta": 119,
+     "fee": 92000,
+     "risk": 0.036,
+     "co2": 296,
+     "score": null,
+     "dist": 24.74,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực SUBURBAN",
+      "BR-D04 Có hàng đông lạnh: cần khoang cấp đông hoặc giao ≤ 30 phút"
+     ]
+    },
+    {
+     "mode": "EBIKE",
+     "name": "Shipper xe máy điện",
+     "feasible": false,
+     "eta": 138,
+     "fee": 121000,
+     "risk": 0.571,
+     "co2": 398,
+     "score": null,
+     "dist": 26.54,
+     "viol": [
+      "BR-D02 Quãng đường 26.54 km > tầm 20 km",
+      "BR-D04 Có hàng đông lạnh: cần khoang cấp đông hoặc giao ≤ 30 phút"
+     ]
+    },
+    {
+     "mode": "LOCKER",
+     "name": "Tủ khóa thông minh (tự nhận)",
+     "feasible": false,
+     "eta": 45,
+     "fee": 0,
+     "risk": 0.018,
+     "co2": 0,
+     "score": null,
+     "dist": 0.5,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực SUBURBAN"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "S6 Thủ Dầu Một — sầu riêng (mùi mạnh)",
+   "pref": "FAST",
+   "weight": 2.6,
+   "coldest": "AMBIENT",
+   "rain": 0,
+   "wind": 6,
+   "chosen": "AUTO_CAR",
+   "confidence": 0.99,
+   "needs_human": false,
+   "reason": "Chọn AUTO_CAR (Xe tự lái (van điện không người lái)) — ETA 160′, phí 100.000đ, rủi ro 1%, ưu tiên FAST. Loại: DRONE: BR-D01, ROBOT: BR-D02, FLYING_CAR: BR-D09, SUBMARINE: BR-D03, AUTO_BOAT: BR-D03, EBIKE: BR-D02, LOCKER: BR-D03.",
+   "options": [
+    {
+     "mode": "AUTO_CAR",
+     "name": "Xe tự lái (van điện không người lái)",
+     "feasible": true,
+     "eta": 160,
+     "fee": 100000,
+     "risk": 0.014,
+     "co2": 1061,
+     "score": 0.8573,
+     "dist": 26.54,
+     "viol": []
+    },
+    {
+     "mode": "DRONE",
+     "name": "Drone giao hàng",
+     "feasible": false,
+     "eta": 102,
+     "fee": 54000,
+     "risk": 0.995,
+     "co2": 157,
+     "score": null,
+     "dist": 19.66,
+     "viol": [
+      "BR-D01 Đơn nặng 2.6 kg > tải tối đa 2.5 kg",
+      "BR-D02 Quãng đường 19.66 km > tầm 12 km"
+     ]
+    },
+    {
+     "mode": "ROBOT",
+     "name": "Robot giao hàng vỉa hè",
+     "feasible": false,
+     "eta": 140,
+     "fee": 48000,
+     "risk": 1.0,
+     "co2": 79,
+     "score": null,
+     "dist": 26.54,
+     "viol": [
+      "BR-D02 Quãng đường 26.54 km > tầm 3 km",
+      "BR-D03 Không phục vụ khu vực SUBURBAN"
+     ]
+    },
+    {
+     "mode": "FLYING_CAR",
+     "name": "Ô tô bay chở hàng (eVTOL)",
+     "feasible": false,
+     "eta": 65,
+     "fee": 280000,
+     "risk": 0.026,
+     "co2": 1202,
+     "score": null,
+     "dist": 20.04,
+     "viol": [
+      "BR-D09 Hàng mùi mạnh (sầu riêng) không đi khoang ô tô bay dùng chung"
+     ]
+    },
+    {
+     "mode": "SUBMARINE",
+     "name": "Tàu ngầm tự hành chở hàng (AUV)",
+     "feasible": false,
+     "eta": 459,
+     "fee": 508000,
+     "risk": 0.033,
+     "co2": 1787,
+     "score": null,
+     "dist": 89.39,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực SUBURBAN"
+     ]
+    },
+    {
+     "mode": "AUTO_BOAT",
+     "name": "Xuồng tự hành trên sông",
+     "feasible": false,
+     "eta": 119,
+     "fee": 92000,
+     "risk": 0.036,
+     "co2": 296,
+     "score": null,
+     "dist": 24.74,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực SUBURBAN"
+     ]
+    },
+    {
+     "mode": "EBIKE",
+     "name": "Shipper xe máy điện",
+     "feasible": false,
+     "eta": 138,
+     "fee": 121000,
+     "risk": 0.571,
+     "co2": 398,
+     "score": null,
+     "dist": 26.54,
+     "viol": [
+      "BR-D02 Quãng đường 26.54 km > tầm 20 km"
+     ]
+    },
+    {
+     "mode": "LOCKER",
+     "name": "Tủ khóa thông minh (tự nhận)",
+     "feasible": false,
+     "eta": 45,
+     "fee": 0,
+     "risk": 0.018,
+     "co2": 0,
+     "score": null,
+     "dist": 0.5,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực SUBURBAN"
+     ]
+    }
+   ]
+  },
+  {
+   "title": "S7 Nhà phố Q1 — trứng + rau, trời mưa to",
+   "pref": "FAST",
+   "weight": 1.15,
+   "coldest": "CHILLED",
+   "rain": 25,
+   "wind": 11,
+   "chosen": "LOCKER",
+   "confidence": 0.62,
+   "needs_human": false,
+   "reason": "Chọn LOCKER (Tủ khóa thông minh (tự nhận)) — ETA 45′, phí 0đ, rủi ro 2%, ưu tiên FAST; phương án 2 là EBIKE (điểm 0.4239). Loại: DRONE: BR-D06, ROBOT: BR-D02, FLYING_CAR: BR-D06, SUBMARINE: BR-D03, AUTO_BOAT: BR-D03.",
+   "options": [
+    {
+     "mode": "LOCKER",
+     "name": "Tủ khóa thông minh (tự nhận)",
+     "feasible": true,
+     "eta": 45,
+     "fee": 0,
+     "risk": 0.018,
+     "co2": 0,
+     "score": 0.3746,
+     "dist": 0.5,
+     "viol": []
+    },
+    {
+     "mode": "EBIKE",
+     "name": "Shipper xe máy điện",
+     "feasible": true,
+     "eta": 63,
+     "fee": 44000,
+     "risk": 0.099,
+     "co2": 107,
+     "score": 0.4239,
+     "dist": 7.15,
+     "viol": []
+    },
+    {
+     "mode": "AUTO_CAR",
+     "name": "Xe tự lái (van điện không người lái)",
+     "feasible": true,
+     "eta": 81,
+     "fee": 41000,
+     "risk": 0.033,
+     "co2": 286,
+     "score": 0.4449,
+     "dist": 7.15,
+     "viol": []
+    },
+    {
+     "mode": "DRONE",
+     "name": "Drone giao hàng",
+     "feasible": false,
+     "eta": 27,
+     "fee": 26000,
+     "risk": 1.0,
+     "co2": 42,
+     "score": null,
+     "dist": 5.3,
+     "viol": [
+      "BR-D06 Thời tiết vượt ngưỡng (gió 11 m/s, mưa 25 mm/h)",
+      "BR-D07 Địa chỉ không có điểm thả drone",
+      "BR-D10 Hàng dễ vỡ + gió > 6 m/s: drone không thả an toàn"
+     ]
+    },
+    {
+     "mode": "ROBOT",
+     "name": "Robot giao hàng vỉa hè",
+     "feasible": false,
+     "eta": 58,
+     "fee": 19000,
+     "risk": 1.0,
+     "co2": 21,
+     "score": null,
+     "dist": 7.15,
+     "viol": [
+      "BR-D02 Quãng đường 7.15 km > tầm 3 km",
+      "BR-D06 Thời tiết vượt ngưỡng (gió 11 m/s, mưa 25 mm/h)"
+     ]
+    },
+    {
+     "mode": "FLYING_CAR",
+     "name": "Ô tô bay chở hàng (eVTOL)",
+     "feasible": false,
+     "eta": 59,
+     "fee": 161000,
+     "risk": 1.0,
+     "co2": 309,
+     "score": null,
+     "dist": 5.15,
+     "viol": [
+      "BR-D06 Thời tiết vượt ngưỡng (gió 11 m/s, mưa 25 mm/h)",
+      "BR-D08 Bãi đáp gần nhất cách 2.4 km (> 1 km)"
+     ]
+    },
+    {
+     "mode": "SUBMARINE",
+     "name": "Tàu ngầm tự hành chở hàng (AUV)",
+     "feasible": false,
+     "eta": 365,
+     "fee": 396000,
+     "risk": 0.02,
+     "co2": 1231,
+     "score": null,
+     "dist": 61.58,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực URBAN_STREET"
+     ]
+    },
+    {
+     "mode": "AUTO_BOAT",
+     "name": "Xuồng tự hành trên sông",
+     "feasible": false,
+     "eta": 56,
+     "fee": 44000,
+     "risk": 0.603,
+     "co2": 69,
+     "score": null,
+     "dist": 5.79,
+     "viol": [
+      "BR-D03 Không phục vụ khu vực URBAN_STREET",
+      "BR-D06 Thời tiết vượt ngưỡng (gió 11 m/s, mưa 25 mm/h)"
+     ]
+    }
+   ]
+  }
+ ],
+ "models": {
+  "eta_mae": 6.51,
+  "risk_auc": 0.886
+ },
+ "search_success": [
+  14,
+  16
+ ],
+ "order_success": [
+  2,
+  2
+ ]
+}
