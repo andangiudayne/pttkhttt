@@ -5,7 +5,3 @@ __pycache__/
 venv/
 .vscode/
 .idea/
-
-# CSDL sinh bởi `python -m db.init_db`
-db/chobay.db
-db/*.db-journal
