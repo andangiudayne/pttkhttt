@@ -1,4 +1,4 @@
-=== ChợBay — AI Search Demo ===
+=== Pop-up Market — AI Search Demo ===
 
 [TEXT] 'nuoc dua' → tokens=['nuoc', 'dua'] max_price=None
    Nước dừa Vietcoco hộp 330ml                   S=0.993 (text 1.00, image 0.00, business 0.96)
@@ -73,7 +73,7 @@
 
 Success rate = 14/16 = 88%
 
-=== ChợBay — AI Delivery Dispatcher Demo ===
+=== Pop-up Market — AI Delivery Dispatcher Demo ===
 ETA model MAE (test) = 6.51 phút · Risk model AUC = 0.886
 
 S1 Chung cư Nhà Bè — sữa chua + bánh mì (nhẹ, mát)  [FAST] weight=0.53 kg, coldest=CHILLED

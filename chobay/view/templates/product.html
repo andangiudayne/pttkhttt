@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}{{ p.name }} · ChợBay{% endblock %}
+{% block title %}{{ p.name }} · Pop-up Market{% endblock %}
 {% block content %}
 {% set WHY = {'BR-D01': 'quá tải trọng', 'BR-D04': 'cần khoang cấp đông', 'BR-D05': 'cần khoang giữ lạnh', 'BR-D09': 'hàng có mùi mạnh'} %}
 <nav class="crumbs"><a href="{{ url_for('home.index') }}">Trang chủ</a> › <a href="{{ url_for('home.index', cat=p.category.category_id) }}">{{ p.category.name }}</a> › {{ p.name }}</nav>

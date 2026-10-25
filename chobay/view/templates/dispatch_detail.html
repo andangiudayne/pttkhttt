@@ -1,6 +1,6 @@
 {% extends "ops_base.html" %}
 {# UC15 Duyệt chuyến đặc biệt — luồng chính: 1 xem lý do AI → 2 kiểm thời tiết, bãi đáp → 3 Duyệt → 4 ASSIGNED, ghi approved_by → 5 Cho xuất phát. #}
-{% block title %}Chuyến đơn #{{ order.order_id }} · Kênh điều phối ChợBay{% endblock %}
+{% block title %}Chuyến đơn #{{ order.order_id }} · Kênh điều phối Pop-up Market{% endblock %}
 {% block content %}
 {% set pay = order.payment %}
 <nav class="crumbs" style="margin-top:0"><a href="{{ url_for('dispatch.board') }}">Quản lý chuyến giao</a> › Đơn #{{ order.order_id }}</nav>

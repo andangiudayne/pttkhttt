@@ -1,2 +1,2 @@
 ﻿staff_id,full_name,role,username,password_hash,status
-1,Đỗ Minh Khang,DISPATCHER,dieuphoi,pbkdf2_sha256$120000$942f1333e4699a2eade3278dce3ba8b4$41d5b0002398a0f32156c44f9305c78d711ef8050ea737a42e2502b4df2e039d,ACTIVE
+1,Đỗ Minh Khang,DISPATCHER,dieuphoi,pbkdf2_sha256$120000$9b337e11309792d5913604f76dd24e67$8c7c71b242ea1c3f222c03ba5c388c0c78b87476fb591e3093f8f1befb408546,ACTIVE

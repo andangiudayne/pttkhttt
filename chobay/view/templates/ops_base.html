@@ -2,13 +2,13 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}Kênh điều phối · ChợBay{% endblock %}</title>
+<title>{% block title %}Kênh điều phối · Pop-up Market{% endblock %}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
 </head>
 {# Giao diện riêng cho nhân viên (tác nhân Điều phối viên) — giống kênh người bán / trung tâm vận hành của các sàn TMĐT. #}
 <body class="ops">
 <header class="ops-top">
-  <a class="logo" href="{{ url_for('dispatch.board') }}">Chợ<span>Bay</span> <small>Kênh điều phối</small></a>
+  <a class="logo" href="{{ url_for('dispatch.board') }}">Pop-up <span>Market</span> <small>Kênh điều phối</small></a>
   <form class="ops-search" action="{{ url_for('dispatch.board') }}" method="get">
     <input name="q" value="{{ q or '' }}" placeholder="Tìm mã đơn (#12) hoặc tên khách" aria-label="Tìm chuyến">
   </form>

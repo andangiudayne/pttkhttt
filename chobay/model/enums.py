@@ -1,4 +1,4 @@
-"""Các kiểu liệt kê (enumeration) dùng chung trong tầng Model của ChợBay."""
+"""Các kiểu liệt kê (enumeration) dùng chung trong tầng Model của Pop-up Market."""
 from enum import Enum
 
 

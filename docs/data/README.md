@@ -1,4 +1,4 @@
-# Dữ liệu mẫu ChợBay
+# Dữ liệu mẫu Pop-up Market
 
 Sinh bởi `python -m db.init_db` (seed_data.py + seed_history.py), xuất bằng `python -m db.export_csv`. Mỗi bảng của `db/schema.sql` là một tệp CSV.
 

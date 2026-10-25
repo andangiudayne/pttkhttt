@@ -1,4 +1,4 @@
-# ChợBay — prototype tiểu luận PTTK HTTT (Lớp 04)
+# Pop-up Market — prototype tiểu luận PTTK HTTT (Lớp 04)
 
 Tạp hóa online với **AI Search đa phương thức** (chữ, giọng nói, hình ảnh) và **AI điều phối giao hàng** 8 phương thức
 (drone, robot vỉa hè, xe tự lái, ô tô bay, tàu ngầm, xuồng tự hành, xe máy điện, tủ khóa).
@@ -114,7 +114,7 @@ Khi demo nên mở hai cửa sổ trình duyệt (một cửa sổ ẩn danh): m
 
 ## Ghi chú
 
-- ChợBay là doanh nghiệp giả định. Khách hàng, địa chỉ, đơn lịch sử, đánh giá và lịch sử tìm kiếm là dữ liệu giả lập; thông số phương tiện là giả định thiết kế; dữ liệu huấn luyện ETA/rủi ro là 6.000 chuyến mô phỏng.
+- Pop-up Market là doanh nghiệp giả định. Khách hàng, địa chỉ, đơn lịch sử, đánh giá và lịch sử tìm kiếm là dữ liệu giả lập; thông số phương tiện là giả định thiết kế; dữ liệu huấn luyện ETA/rủi ro là 6.000 chuyến mô phỏng.
 - Cổng thanh toán là stub. Thẻ thử: `4242 4242 4242 4242` (thành công), `4000 0000 0000 0002` (ngân hàng từ chối), hạn `12/30`, CVV `123`.
   Số thẻ được kiểm tra bằng thuật toán Luhn, hạn dùng và CVV; CSDL chỉ lưu 4 số cuối (NFR03).
 - Ảnh sản phẩm: Open Food Facts (CC BY-SA 3.0) và Wikimedia Commons — nguồn từng ảnh ở slide cuối; trang sản phẩm ghi nguồn dưới ảnh.

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {# UC05 Đặt hàng «include» UC06 AI đề xuất cách giao, UC07 Thanh toán, «extend» UC08 Ưu đãi.
    Bố cục theo trang thanh toán của các sàn TMĐT: địa chỉ → sản phẩm → vận chuyển → ưu đãi → thanh toán → tổng tiền. #}
-{% block title %}Thanh toán · ChợBay{% endblock %}
+{% block title %}Thanh toán · Pop-up Market{% endblock %}
 {% block content %}
 {% set WHY = {'BR-D01': 'Giỏ hàng vượt tải trọng', 'BR-D02': 'Địa chỉ quá xa', 'BR-D03': 'Không phục vụ khu vực này',
               'BR-D04': 'Có hàng đông lạnh cần khoang cấp đông', 'BR-D05': 'Có hàng mát cần khoang giữ lạnh',
@@ -93,7 +93,7 @@
 
     {# ---------- 4. Ưu đãi (UC08) ---------- #}
     <section class="co-card">
-      <div class="co-head"><h3>🎟️ Ưu đãi ChợBay</h3></div>
+      <div class="co-head"><h3>🎟️ Ưu đãi Pop-up Market</h3></div>
       {% if discount %}
       <div class="voucher"><span class="v-tag">{{ 'VIP' if me.discount_rate() > 0 else 'MỚI' }}</span>
         <span>{% if me.discount_rate() > 0 %}Ưu đãi thành viên VIP — giảm {{ (me.discount_rate()*100)|round|int }}% tiền hàng{% else %}Voucher chào mừng khách mới — giảm {{ discount|vnd }}{% endif %}
@@ -116,7 +116,7 @@
           <label class="fld">Ngày hết hạn<input name="card_exp" form="orderform" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5"></label>
           <label class="fld">CVV<input name="card_cvv" form="orderform" inputmode="numeric" autocomplete="cc-csc" placeholder="3 số mặt sau" maxlength="4" type="password"></label>
         </div>
-        <p class="muted secure">🔒 ChợBay chỉ lưu 4 số cuối của thẻ; số thẻ đầy đủ và CVV được chuyển thẳng tới cổng thanh toán.</p>
+        <p class="muted secure">🔒 Pop-up Market chỉ lưu 4 số cuối của thẻ; số thẻ đầy đủ và CVV được chuyển thẳng tới cổng thanh toán.</p>
       </div>
       <div id="pay-EWALLET" class="pay-form" hidden>
         <div class="seg">{% for wl in wallets %}<label><input type="radio" name="wallet" value="{{ wl }}" form="orderform" {% if loop.first %}checked{% endif %}><span>{{ wl }}</span></label>{% endfor %}</div>
@@ -137,7 +137,7 @@
       <div class="sum total"><span>Tổng thanh toán</span><b id="total" data-base="{{ cart.subtotal() - discount }}">{{ (cart.subtotal() + fee - discount)|vnd }}</b></div>
       <p class="muted" style="font-size:12.5px;text-align:right;margin:2px 0 14px">Đã bao gồm VAT nếu có</p>
       <button class="btn chili co-btn" {% if not ai %}disabled{% endif %}>Đặt hàng</button>
-      <p class="muted terms">Nhấn “Đặt hàng” đồng nghĩa bạn đồng ý với điều khoản mua hàng của ChợBay.</p>
+      <p class="muted terms">Nhấn “Đặt hàng” đồng nghĩa bạn đồng ý với điều khoản mua hàng của Pop-up Market.</p>
     </form>
   </aside>
 </div>

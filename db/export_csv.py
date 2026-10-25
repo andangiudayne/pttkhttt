@@ -23,7 +23,7 @@ def main(db_path: Path = ROOT / "db" / "chobay.db") -> dict[str, int]:
             w.writerows(rows)
         counts[t] = len(rows)
     with open(OUT / "README.md", "w", encoding="utf-8") as f:
-        f.write("# Dữ liệu mẫu ChợBay\n\nSinh bởi `python -m db.init_db` (seed_data.py + seed_history.py), "
+        f.write("# Dữ liệu mẫu Pop-up Market\n\nSinh bởi `python -m db.init_db` (seed_data.py + seed_history.py), "
                 "xuất bằng `python -m db.export_csv`. Mỗi bảng của `db/schema.sql` là một tệp CSV.\n\n"
                 "| Bảng | Số dòng |\n|---|---|\n" + "".join(f"| `{t}` | {n} |\n" for t, n in counts.items()))
     con.close()

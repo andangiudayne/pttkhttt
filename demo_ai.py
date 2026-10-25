@@ -17,7 +17,7 @@ c = Container(Database(TMP))
 P = c.product_dao.get_item
 out = {"search": [], "dispatch": [], "models": {}}
 
-print("=== ChợBay — AI Search Demo ===")
+print("=== Pop-up Market — AI Search Demo ===")
 SEARCHES = [
     ("TEXT", "nuoc dua", None, 10),
     ("TEXT", "sữa tươi dưới 40k", None, 6),
@@ -60,7 +60,7 @@ for mode, text, img, expect in SEARCHES:
 print(f"\nProduct search success = {ok}/{len(SEARCHES)} = {ok/len(SEARCHES):.0%}")
 out["search_success"] = [ok, len(SEARCHES)]
 
-print("\n=== ChợBay — AI Delivery Dispatcher Demo ===")
+print("\n=== Pop-up Market — AI Delivery Dispatcher Demo ===")
 print(f"ETA model MAE (test) = {c.eta_model.mae:.2f} phút · Risk model AUC = {c.risk_model.auc:.3f}")
 out["models"] = dict(eta_mae=round(c.eta_model.mae, 2), risk_auc=round(c.risk_model.auc, 3))
 SCEN = [

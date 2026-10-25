@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Đơn hàng #{{ order.order_id }} · ChợBay{% endblock %}
+{% block title %}Đơn hàng #{{ order.order_id }} · Pop-up Market{% endblock %}
 {% block content %}
 <div class="sr-head">
   <div class="muted">Đặt lúc {{ order.order_date.strftime('%H:%M · %d/%m/%Y') }}</div>
@@ -16,7 +16,7 @@
     </div>
     {% if s.status.value == 'AWAITING_APPROVAL' %}<p class="note">Chuyến {{ s.mode|vi|lower }} cần điều phối viên xác nhận an toàn trước khi xuất phát. Chúng tôi sẽ cập nhật ngay khi chuyến được duyệt.</p>
     {% elif s.approved_by and s.status.value in ['ASSIGNED', 'IN_TRANSIT'] %}<p class="note" style="background:#DCEBFA;color:#1D4F86">Điều phối viên đã xác nhận chuyến — phương tiện sẽ xuất phát ngay.</p>
-    {% elif s.status.value == 'DELIVERED' %}<p class="note" style="background:#DDF2E8;color:#156343">Đơn đã được giao thành công. Cảm ơn bạn đã mua sắm tại ChợBay!
+    {% elif s.status.value == 'DELIVERED' %}<p class="note" style="background:#DDF2E8;color:#156343">Đơn đã được giao thành công. Cảm ơn bạn đã mua sắm tại Pop-up Market!
       <form method="post" action="{{ url_for('order.reorder', order_id=order.order_id) }}" style="display:inline;margin-left:10px"><button class="btn ghost sm">Mua lại cả đơn</button></form></p>{% endif %}
   </div>
   <div class="panel">

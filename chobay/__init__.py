@@ -1,4 +1,4 @@
-"""ChợBay — Web tạp hóa tích hợp AI tìm kiếm đa phương thức & AI điều phối giao hàng đa phương tiện.
+"""Pop-up Market — Web tạp hóa tích hợp AI tìm kiếm đa phương thức & AI điều phối giao hàng đa phương tiện.
 create_app() lắp ráp các tầng theo kiến trúc MVC + DAO (Dependency Injection thủ công)."""
 import os
 from flask import Flask, flash, redirect, request, url_for

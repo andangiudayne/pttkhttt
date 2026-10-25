@@ -1,4 +1,4 @@
-"""Chạy web ChợBay:  python run.py  → http://127.0.0.1:5000"""
+"""Chạy web Pop-up Market:  python run.py  → http://127.0.0.1:5000"""
 from chobay import create_app
 
 app = create_app()

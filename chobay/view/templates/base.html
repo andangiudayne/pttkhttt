@@ -2,13 +2,13 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}ChợBay — Tạp hóa giao bằng drone{% endblock %}</title>
+<title>{% block title %}Pop-up Market — Tạp hóa giao bằng drone{% endblock %}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
 </head>
 <body>
 <header>
   <div class="wrap topbar">
-    <a class="logo" href="{{ url_for('home.index') }}">Chợ<span>Bay</span></a>
+    <a class="logo" href="{{ url_for('home.index') }}">Pop-up <span>Market</span></a>
     <form class="searchbox" id="searchbox" action="{{ url_for('search.search') }}" method="post" enctype="multipart/form-data">
       <select name="mode" aria-label="Kiểu tìm kiếm">
         <option value="TEXT" {% if mode == 'TEXT' %}selected{% endif %}>Gõ chữ</option>

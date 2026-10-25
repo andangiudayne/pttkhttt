@@ -1,4 +1,4 @@
-"""Kiểm thử đơn vị & tích hợp ChợBay — chạy: python -m pytest -q"""
+"""Kiểm thử đơn vị & tích hợp Pop-up Market — chạy: python -m pytest -q"""
 import re
 import shutil
 import pytest

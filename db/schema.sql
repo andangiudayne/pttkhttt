@@ -1,4 +1,4 @@
--- ChợBay — Physical data model (SQLite 3)
+-- Pop-up Market — Physical data model (SQLite 3)
 -- Sinh từ Data Model (4.2): kế thừa được chuyển thành quan hệ 1–0..1 (bảng con dùng chung khóa chính).
 PRAGMA foreign_keys = ON;
 

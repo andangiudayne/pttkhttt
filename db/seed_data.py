@@ -1,4 +1,4 @@
-"""Dữ liệu mẫu ChợBay. Ảnh sản phẩm là ảnh chụp thật (Open Food Facts, Wikimedia Commons) — nguồn từng ảnh ở slide “Nguồn ảnh” và README.
+"""Dữ liệu mẫu Pop-up Market. Ảnh sản phẩm là ảnh chụp thật (Open Food Facts, Wikimedia Commons) — nguồn từng ảnh ở slide “Nguồn ảnh” và README.
 Khách hàng, địa chỉ chi tiết và đội phương tiện là dữ liệu giả lập phục vụ demo."""
 
 CATEGORIES = [
@@ -106,7 +106,7 @@ ADDRESSES = [
 
 HUBS = [
     # id, name, type, lat, lon, transfer_min
-    (1, "Kho tối ChợBay Quận 7", "DARK_STORE", 10.7340, 106.7220, 0),
+    (1, "Kho tối Pop-up Market Quận 7", "DARK_STORE", 10.7340, 106.7220, 0),
     (2, "Drone port Thủ Đức", "DRONE_PORT", 10.8500, 106.7720, 25),
     (3, "Vertiport Tân Bình", "VERTIPORT", 10.8000, 106.6600, 25),
     (4, "Cảng tàu ngầm Cần Giờ", "SEA_DOCK", 10.4110, 106.9550, 70),

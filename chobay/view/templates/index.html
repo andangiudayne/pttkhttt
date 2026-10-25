@@ -19,6 +19,6 @@
     </table>
   </div>
 </section>
-<h2>{% if active_cat %}{{ (categories|selectattr('category_id','equalto',active_cat)|first).name }}{% else %}Hôm nay có gì ở ChợBay{% endif %}</h2>
+<h2>{% if active_cat %}{{ (categories|selectattr('category_id','equalto',active_cat)|first).name }}{% else %}Hôm nay có gì ở Pop-up Market{% endif %}</h2>
 <div class="grid">{% for p in products %}{% include "_card.html" %}{% endfor %}</div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends "ops_base.html" %}
 {# IWeatherService — mặc định OpenMeteoWeatherService: thời tiết tự cập nhật theo dự báo (Open-Meteo), làm mới mỗi 15 phút.
    Điều phối viên chỉ ghi đè thủ công khi có sự cố / diễn tập, rồi bấm “Về tự động”. AI đọc ở mỗi lần đề xuất (BR-D06). #}
-{% block title %}Thời tiết · Kênh điều phối ChợBay{% endblock %}
+{% block title %}Thời tiết · Kênh điều phối Pop-up Market{% endblock %}
 {% set drone = types|selectattr('mode.value', 'equalto', 'DRONE')|first %}
 {% set fcar = types|selectattr('mode.value', 'equalto', 'FLYING_CAR')|first %}
 {% block content %}
